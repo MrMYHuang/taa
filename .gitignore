@@ -51,5 +51,10 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
 .vs
 *.bundle
+*.pfx
+.vscode
+*.png
+*.appx
