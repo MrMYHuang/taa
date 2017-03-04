@@ -33,7 +33,7 @@ var dismissKeyboard = require('dismissKeyboard');
 
 var MovieCell = require('./MovieCell');
 var MovieScreen = require('./MovieScreen');
-var SearchBar = require('SearchBar');
+//var SearchBar = require('SearchBar');
 
 /**
  * This is for demo purposes only, and rate limited.

@@ -29,6 +29,7 @@ var {
 var MovieScreen = require('./MovieScreen');
 var SearchScreen = require('./SearchScreen');
 var TitleBarWindows = require('./TitleBarWindows');
+var About = require('./About');
 
 var _navigator;
 BackAndroid.addEventListener('hardwareBackPress', () => {
@@ -39,7 +40,6 @@ BackAndroid.addEventListener('hardwareBackPress', () => {
   return false;
 });
 
-var About = require('./About');
 
 var RouteMapper = function(route, navigationOperations, onComponentRef) {
   _navigator = navigationOperations;
