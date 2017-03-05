@@ -25,6 +25,7 @@ var {
   StyleSheet,
   View,
 } = ReactNative;
+import codePush from "react-native-code-push";
 
 var MovieScreen = require('./MovieScreen');
 var SearchScreen = require('./SearchScreen');
@@ -105,6 +106,8 @@ var styles = StyleSheet.create({
   },
 });
 
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
+MoviesApp = codePush(codePushOptions)(MoviesApp);
 AppRegistry.registerComponent('taa', () => MoviesApp);
 
 module.exports = MoviesApp;

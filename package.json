@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "bundle_uwp": "react-native bundle --platform windows --entry-file index.windows.js  --bundle-output windows/taa/ReactAssets/index.windows.bundle --assets-dest windows/taa/ReactAssets",
+    "codepush_uwp": "code-push release-react taa-uwp windows"
   },
   "dependencies": {
     "assert": "^1.1.1",

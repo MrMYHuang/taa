@@ -23,7 +23,13 @@ namespace taa
             get
             {
                 //return "ms-appx:///Assets/index.windows.bundle";
-                codePushReactPackage = new CodePushReactPackage("deployment-key-here", this);
+                string cpKey;
+#if DEBUG
+        cpKey = "staging_key";
+#else
+                cpKey = "production_key";
+#endif
+                codePushReactPackage = new CodePushReactPackage(cpKey, this);
                 return codePushReactPackage.GetJavaScriptBundleFile();
             }
         }
@@ -33,12 +39,15 @@ namespace taa
         {
             get
             {
-                return new List<IReactPackage>
+                var rpl = new List<IReactPackage>
                 {
                     new MainReactPackage(),
-                    new TaaReactPackage(),
-                    codePushReactPackage
+                    new TaaReactPackage()
                 };
+#if BUNDLE
+                rpl.Add(codePushReactPackage);
+#endif
+                return rpl;
             }
         }
 
