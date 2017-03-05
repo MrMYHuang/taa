@@ -2,6 +2,7 @@ using ReactNative;
 using ReactNative.Modules.Core;
 using ReactNative.Shell;
 using System.Collections.Generic;
+using CodePush.ReactNative;
 
 namespace taa
 {
@@ -16,11 +17,14 @@ namespace taa
         }
 
 #if BUNDLE
+        private CodePushReactPackage codePushReactPackage;
         public override string JavaScriptBundleFile
         {
             get
             {
-                return "ms-appx:///Assets/index.windows.bundle";
+                //return "ms-appx:///Assets/index.windows.bundle";
+                codePushReactPackage = new CodePushReactPackage("deployment-key-here", this);
+                return codePushReactPackage.GetJavaScriptBundleFile();
             }
         }
 #endif
@@ -33,6 +37,7 @@ namespace taa
                 {
                     new MainReactPackage(),
                     new TaaReactPackage(),
+                    codePushReactPackage
                 };
             }
         }

@@ -10,8 +10,11 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ReactNative.Shared", "..\no
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ChakraBridge", "..\node_modules\react-native-windows\ReactWindows\ChakraBridge\ChakraBridge.vcxproj", "{4B72C796-16D5-4E3A-81C0-3E36F531E578}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodePush", "..\node_modules\react-native-code-push\windows\CodePush\CodePush.csproj", "{446A85D9-55EB-4C7D-8B9D-448306C833D6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\node_modules\react-native-code-push\windows\CodePush.Shared\CodePush.Shared.projitems*{446a85d9-55eb-4c7d-8b9d-448306c833d6}*SharedItemsImports = 4
 		..\node_modules\react-native-windows\ReactWindows\ReactNative.Shared\ReactNative.Shared.projitems*{c7673ad5-e3aa-468c-a5fd-fa38154e205c}*SharedItemsImports = 4
 		..\node_modules\react-native-windows\ReactWindows\ReactNative.Shared\ReactNative.Shared.projitems*{eea8b852-4d07-48e1-8294-a21ab5909fe5}*SharedItemsImports = 13
 	EndGlobalSection
@@ -114,6 +117,30 @@ Global
 		{4B72C796-16D5-4E3A-81C0-3E36F531E578}.ReleaseBundle|x64.Build.0 = Release|x64
 		{4B72C796-16D5-4E3A-81C0-3E36F531E578}.ReleaseBundle|x86.ActiveCfg = Release|Win32
 		{4B72C796-16D5-4E3A-81C0-3E36F531E578}.ReleaseBundle|x86.Build.0 = Release|Win32
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|ARM.ActiveCfg = Debug|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|ARM.Build.0 = Debug|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|x64.ActiveCfg = Debug|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|x64.Build.0 = Debug|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|x86.ActiveCfg = Debug|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Debug|x86.Build.0 = Debug|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|ARM.ActiveCfg = Debug|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|ARM.Build.0 = Debug|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|x64.ActiveCfg = Debug|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|x64.Build.0 = Debug|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|x86.ActiveCfg = Debug|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.DebugBundle|x86.Build.0 = Debug|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|ARM.ActiveCfg = Release|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|ARM.Build.0 = Release|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|x64.ActiveCfg = Release|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|x64.Build.0 = Release|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|x86.ActiveCfg = Release|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.Release|x86.Build.0 = Release|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|ARM.ActiveCfg = Release|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|ARM.Build.0 = Release|ARM
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|x64.ActiveCfg = Release|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|x64.Build.0 = Release|x64
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|x86.ActiveCfg = Release|x86
+		{446A85D9-55EB-4C7D-8B9D-448306C833D6}.ReleaseBundle|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
