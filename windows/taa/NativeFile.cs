@@ -28,11 +28,23 @@ namespace taa
         }
 
         [ReactMethod]
+        public async void FileExistAsync(string fileName, IPromise promise)
+        {
+            bool fileExist = false;
+
+            var lf = ApplicationData.Current.LocalFolder;
+            var isi = await lf.TryGetItemAsync(fileName);
+            if (isi != null)
+                fileExist = true;
+            promise.Resolve(fileExist);
+        }
+
+        [ReactMethod]
         public async void SaveStrAsync(string fileName, string str, IPromise promise)
         {
             var lf = ApplicationData.Current.LocalFolder;
             var sf = await lf.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-            using(var s = await sf.OpenStreamForWriteAsync())
+            using (var s = await sf.OpenStreamForWriteAsync())
             {
                 using (var sw = new StreamWriter(s))
                 {
@@ -58,10 +70,10 @@ namespace taa
                 }
                 promise.Resolve(str);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 promise.Reject(ex);
-            }            
+            }
         }
     }
 }

@@ -24,17 +24,34 @@ var {
   Text,
   TouchableHighlight,
   TouchableNativeFeedback,
-  View
+  View,
+  Linking
 } = ReactNative;
 
+import HyperLink from './HyperLink'
+
+import { connect } from "react-redux"
+@connect((store) => {
+  return {
+    animalDbDate: store.settings.animalDbDate
+  };
+})
 class About extends React.Component {
   render() {
+    const { animalDbDate } = this.props;
     return (
       <View>
-          <Text>* 版本：1.0.8</Text>
-          <Text>* 作者：Meng-Yuan Huang</Text>
-          <Text>* 作者信箱：myhDev@live.com</Text>
-          <Text>* 版權宣告：logo來源http://www.freepik.com</Text>
+        <Text>* 版本
+            1.1.0:
+                * 修正"下載資料庫"鈕無法更新資料庫的問題。
+                * 關於頁面顯示上次下載資料之時間。
+            1.0.8：
+                * 第一版。
+            </Text>
+        <Text>* 作者：Meng-Yuan Huang</Text>
+        <Text>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+        <Text>* 版權宣告：logo來源<HyperLink>http://www.freepik.com</HyperLink></Text>
+        <Text>* 資料庫下庫日期：{animalDbDate}</Text>
       </View>
     );
   }
