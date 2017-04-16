@@ -96,13 +96,6 @@ var styles = StyleSheet.create({
   },
 });
 
-/*
-if (!(__DEV__)) {
-  let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
-  MoviesApp = codePush(codePushOptions)(MoviesApp);
-}
-*/
-
 class MoviesApp extends React.Component {
   constructor(props) {
     super(props);
@@ -140,6 +133,13 @@ class MoviesApp extends React.Component {
     );
   }
 };
+
+//if (!(__DEV__)) {
+  let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START };
+  MoviesApp = codePush(codePushOptions)(MoviesApp);
+  //codePush.sync({ updateDialog: true})
+//}
+
 AppRegistry.registerComponent('taa', () => MoviesApp);
 
 module.exports = MoviesApp;

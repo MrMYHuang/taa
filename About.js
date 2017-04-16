@@ -41,10 +41,13 @@ class About extends React.Component {
     const { animalDbDate } = this.props;
     return (
       <View>
-        <Text>* 版本
+        <Text>* 版本</Text>
+        <Text>
             1.1.0:
+                * 支援CodePush更新app。
                 * 修正"下載資料庫"鈕無法更新資料庫的問題。
-                * 關於頁面顯示上次下載資料之時間。
+                * 關於頁面顯示上次下載資料之時間。</Text>
+        <Text>
             1.0.8：
                 * 第一版。
             </Text>

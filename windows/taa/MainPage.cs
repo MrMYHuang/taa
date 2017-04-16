@@ -22,7 +22,7 @@ namespace taa
         {
             get
             {
-                //return "ms-appx:///Assets/index.windows.bundle";
+                //return "ms-appx:///ReactAssets/index.windows.bundle";
                 string cpKey;
 #if DEBUG
         cpKey = "staging_key";
