@@ -175,11 +175,11 @@ class MoviesApp extends React.Component {
   }
 };
 
-//if (!(__DEV__)) {
-let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
-MoviesApp = codePush(codePushOptions)(MoviesApp);
-//codePush.sync({ updateDialog: true})
-//}
+if (!(__DEV__)) {
+  let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
+  MoviesApp = codePush(codePushOptions)(MoviesApp);
+  codePush.sync({ updateDialog: true })
+}
 
 AppRegistry.registerComponent('taa', () => MoviesApp);
 
