@@ -42,6 +42,8 @@ class About extends React.Component {
     return (
       <View>
 <Text>{`*版本歷史：
+1.2.2:
+  * 修正下載更新完成對話窗重複出現的bug。
 1.2.0:
   * CodePush更新會顯示確認視窗與下載進度。
 1.1.0:

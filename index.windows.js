@@ -129,13 +129,32 @@ class MoviesApp extends React.Component {
     })
   }
 
+  codePushStatusDidChange(status) {
+    switch (status) {
+      /*
+      case codePush.SyncStatus.CHECKING_FOR_UPDATE:
+        console.log("Checking for updates.");
+        break;
+      case codePush.SyncStatus.DOWNLOADING_PACKAGE:
+        console.log("Downloading package.");
+        break;
+      case codePush.SyncStatus.INSTALLING_UPDATE:
+        console.log("Installing update.");
+        break;
+      case codePush.SyncStatus.UP_TO_DATE:
+        console.log("Up-to-date.");
+        break;
+      */
+      case codePush.SyncStatus.UPDATE_INSTALLED:
+        Alert.alert("下載更新完成", "請重新啟動app。")
+        break;
+    }
+  }
+
   codePushDownloadDidProgress(progress) {
     this.setState({ showUpdateBar: true })
     var percent = progress.receivedBytes / progress.totalBytes * 100
     this.setState({ updateProgress: percent })
-    if (percent == 100) {
-      Alert.alert("下載更新完成", "請重新啟動app。")
-    }
   }
 
   render() {
