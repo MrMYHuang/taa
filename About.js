@@ -41,20 +41,22 @@ class About extends React.Component {
     const { animalDbDate } = this.props;
     return (
       <View>
-        <Text>* 版本</Text>
-        <Text>
-            1.1.0:
-                * 支援CodePush更新app。
-                * 修正"下載資料庫"鈕無法更新資料庫的問題。
-                * 關於頁面顯示上次下載資料之時間。</Text>
-        <Text>
-            1.0.8：
-                * 第一版。
-            </Text>
+<Text>{`*版本歷史：
+1.2.0:
+  * CodePush更新會顯示確認視窗與下載進度。
+1.1.0:
+  * 支援CodePush更新app。
+  * 修正"下載資料庫"鈕無法更新資料庫的問題。
+  * 關於頁面顯示上次下載資料之時間。
+1.0.8：
+  * 第一版。`}</Text>
+        <Text />
         <Text>* 作者：Meng-Yuan Huang</Text>
         <Text>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
-        <Text>* 版權宣告：logo來源<HyperLink>http://www.freepik.com</HyperLink></Text>
-        <Text>* 資料庫下庫日期：{animalDbDate}</Text>
+        <Text>* 版權宣告：</Text>
+        <Text>  資料庫來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
+        <Text>  資料庫下載日期：{animalDbDate}</Text>
+        <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
       </View>
     );
   }

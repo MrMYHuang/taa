@@ -24,6 +24,7 @@ var {
   Navigator,
   StyleSheet,
   View,
+  Alert,
 } = ReactNative;
 import codePush from "react-native-code-push";
 
@@ -49,8 +50,8 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
   if (route.name === 'search') {
     return (
       <SearchScreen navigator={navigationOperations}
-      providerKey={route.providerKey}
-       />
+        providerKey={route.providerKey}
+      />
     );
   }
   else if (route.name === 'about') {
@@ -88,6 +89,11 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
+    backgroundColor: 'white',
+  },
+  navigator: {
+    flex: 1,
     backgroundColor: 'white',
   },
   toolbar: {
@@ -95,6 +101,8 @@ var styles = StyleSheet.create({
     height: 56,
   },
 });
+
+var ProgressBar = require('ProgressBarWindows');
 
 class MoviesApp extends React.Component {
   constructor(props) {
@@ -104,6 +112,8 @@ class MoviesApp extends React.Component {
     // We use useSavedStore for working around this issue.
     this.state = {
       providerKey: 0,
+      showUpdateBar: false,
+      updateProgress: 0,
       store: blankStore
     }
     this.useSavedStore()
@@ -119,25 +129,37 @@ class MoviesApp extends React.Component {
     })
   }
 
+  codePushDownloadDidProgress(progress) {
+    this.setState({ showUpdateBar: true })
+    var percent = progress.receivedBytes / progress.totalBytes * 100
+    this.setState({ updateProgress: percent })
+    if (percent == 100) {
+      Alert.alert("下載更新完成", "請重新啟動app。")
+    }
+  }
+
   render() {
     var initialRoute = { name: 'search', providerKey: this.state.providerKey };
     return (
       <Provider key={"provider" + this.state.providerKey} store={this.state.store}>
-        <Navigator
-          style={styles.container}
-          initialRoute={initialRoute}
-          configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-          renderScene={RouteMapper}
-        />
+        <View style={styles.container}>
+          <Navigator
+            style={styles.navigator}
+            initialRoute={initialRoute}
+            configureScene={() => Navigator.SceneConfigs.FadeAndroid}
+            renderScene={RouteMapper}
+          />
+          {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
+        </View>
       </Provider>
     );
   }
 };
 
 //if (!(__DEV__)) {
-  let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START };
-  MoviesApp = codePush(codePushOptions)(MoviesApp);
-  //codePush.sync({ updateDialog: true})
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
+MoviesApp = codePush(codePushOptions)(MoviesApp);
+//codePush.sync({ updateDialog: true})
 //}
 
 AppRegistry.registerComponent('taa', () => MoviesApp);
