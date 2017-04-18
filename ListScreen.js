@@ -30,8 +30,8 @@ var {
 var invariant = require('fbjs/lib/invariant');
 var dismissKeyboard = require('dismissKeyboard');
 
-var MovieCell = require('./MovieCell');
-var MovieScreen = require('./MovieScreen');
+var AnimalCell = require('./AnimalCell');
+var AnimalScreen = require('./AnimalScreen');
 //var SearchBar = require('SearchBar');
 
 /**
@@ -55,7 +55,7 @@ var animalFile = 'Animals.json'
     animalDbDate: store.settings.animalDbDate
   };
 })
-class SearchScreen extends React.Component {
+class ListScreen extends React.Component {
   timeoutID = null
 
   constructor(props) {
@@ -144,19 +144,19 @@ class SearchScreen extends React.Component {
     return this.state.dataSource.cloneWithRows(dispAnimals);
   }
 
-  selectMovie(movie: Object) {
+  selectAnimal(animal: Object) {
     if (Platform.OS === 'ios') {
       this.props.navigator.push({
-        title: movie.title,
-        component: MovieScreen,
-        passProps: { movie },
+        title: animal.animal_id,
+        component: AnimalScreen,
+        passProps: { animal },
       });
     } else {
       dismissKeyboard();
       this.props.navigator.push({
-        title: movie.title,
-        name: 'movie',
-        movie: movie,
+        title: animal.animal_id,
+        name: 'animal',
+        animal: animal,
       });
     }
   }
@@ -164,13 +164,13 @@ class SearchScreen extends React.Component {
   go2about() {
     if (Platform.OS === 'ios') {
       this.props.navigator.push({
-        title: movie.title,
-        component: MovieScreen,
-        passProps: { movie },
+        title: '關於',
+        component: AnimalScreen,
       });
     } else {
       dismissKeyboard();
       this.props.navigator.push({
+        title: '關於',
         name: 'about'
       });
     }
@@ -200,25 +200,25 @@ class SearchScreen extends React.Component {
   }
 
   renderRow(
-    movie: Object,
+    animal: Object,
     sectionID: number | string,
     rowID: number | string,
     highlightRowFunc: (sectionID: ?number | string, rowID: ?number | string) => void,
   ) {
     return (
-      <MovieCell
-        key={movie.id}
-        onSelect={() => this.selectMovie(movie)}
+      <AnimalCell
+        key={animal.id}
+        onSelect={() => this.selectAnimal(animal)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
-        movie={movie}
+        animal={animal}
       />
     );
   }
 
   render() {
     var content = this.state.dataSource.getRowCount() === 0 ?
-      <NoMovies
+      <NoAnimals
         isLoading={this.state.isLoading}
       /> :
       <ListView
@@ -258,20 +258,20 @@ class SearchScreen extends React.Component {
             this.refs.listview && this.refs.listview.getScrollResponder().scrollTo({ x: 0, y: 0 })}
         /> */
 
-class NoMovies extends React.Component {
+class NoAnimals extends React.Component {
   render() {
     var text = '';
     if (this.props.filter) {
       text = `No results for "${this.props.filter}"`;
     } else if (!this.props.isLoading) {
-      // If we're looking at the latest movies, aren't currently loading, and
+      // If we're looking at the latest animals, aren't currently loading, and
       // still have no results, show a message
       text = 'No data found';
     }
 
     return (
       <View style={[styles.container, styles.centerText]}>
-        <Text style={styles.noMoviesText}>{text}</Text>
+        <Text style={styles.noAnimalsText}>{text}</Text>
       </View>
     );
   }
@@ -300,7 +300,7 @@ var styles = StyleSheet.create({
   centerText: {
     alignItems: 'center',
   },
-  noMoviesText: {
+  noAnimalsText: {
     marginTop: 80,
     color: '#888888',
   },
@@ -321,4 +321,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = SearchScreen;
+module.exports = ListScreen;

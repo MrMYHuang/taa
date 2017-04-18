@@ -18,7 +18,7 @@
  * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @providesModule MoviesApp
+ * @providesModule AnimalsAdoptionApp
  * @flow
  */
 'use strict';
@@ -36,8 +36,8 @@ var {
   View,
 } = ReactNative;
 
-var MovieScreen = require('./MovieScreen');
-var SearchScreen = require('./SearchScreen');
+var AnimalScreen = require('./AnimalScreen');
+var ListScreen = require('./ListScreen');
 var About = require('./About');
 
 var _navigator;
@@ -53,7 +53,7 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
   _navigator = navigationOperations;
   if (route.name === 'search') {
     return (
-      <SearchScreen navigator={navigationOperations} />
+      <ListScreen navigator={navigationOperations} />
     );
   }
   else if (route.name === 'about') {
@@ -62,11 +62,11 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
         <About
           style={{flex: 1}}
           navigator={navigationOperations}
-          movie={route.movie}
+          animal={route.animal}
         />
       </View>
       )
-  } else if (route.name === 'movie') {
+  } else if (route.name === 'animal') {
     return (
       <View style={{flex: 1}}>
         <ToolbarAndroid
@@ -79,18 +79,18 @@ var RouteMapper = function(route, navigationOperations, onComponentRef) {
           onIconClicked={navigationOperations.pop}
           style={styles.toolbar}
           titleColor="white"
-          title={route.movie.title} />
-        <MovieScreen
+          title={route.animal.title} />
+        <AnimalScreen
           style={{flex: 1}}
           navigator={navigationOperations}
-          movie={route.movie}
+          animal={route.animal}
         />
       </View>
     );
   }
 };
 
-class MoviesApp extends React.Component {
+class AnimalsAdoptionApp extends React.Component {
   render() {
     var initialRoute = {name: 'search'};
     return (
@@ -115,6 +115,6 @@ var styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('taa', () => MoviesApp);
+AppRegistry.registerComponent('taa', () => AnimalsAdoptionApp);
 
-module.exports = MoviesApp;
+module.exports = AnimalsAdoptionApp;

@@ -70,13 +70,7 @@ var styles = StyleSheet.create({
   },
   textContainer: {
     flex: 2,
-  },
-  movieTitle: {
-    flex: 1,
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 2,
-  },
+  }
 });
 
 module.exports = About;

@@ -25,7 +25,6 @@ var {
   View,
 } = ReactNative;
 
-var getImageSource = require('./getImageSource');
 var getStyleFromScore = require('./getStyleFromScore');
 var getTextFromScore = require('./getTextFromScore');
 
@@ -34,18 +33,18 @@ var dispFields = ["流水編號", "區域編號", "所屬縣市代碼", "所屬�
 
 var keys = ["animal_id", "animal_subid", "animal_area_pkid", "animal_shelter_pkid", "animal_place", "animal_kind", "animal_sex", "animal_bodytype", "animal_colour", "animal_age", "animal_sterilization", "animal_bacterin", "animal_foundplace", "animal_title", "animal_status", "animal_remark", "animal_caption", "animal_opendate", "animal_closeddate", "animal_update", "animal_createtime", "shelter_name", "album_name", "cDate", "shelter_address", "shelter_tel"]
 
-class MovieScreen extends React.Component {
+class AnimalScreen extends React.Component {
   render() {
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + this.props.movie[keys[i]]}</Text>);
+      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + this.props.animal[keys[i]]}</Text>);
     }
 
     return (
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.mainSection}>
           <Image
-            source={{ uri: this.props.movie.album_file }}
+            source={{ uri: this.props.animal.album_file }}
             style={styles.detailsImage}
             resizeMode='contain'
           />
@@ -79,4 +78,4 @@ var styles = StyleSheet.create({
   }
 });
 
-module.exports = MovieScreen;
+module.exports = AnimalScreen;

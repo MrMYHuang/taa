@@ -28,7 +28,6 @@ var {
 } = ReactNative;
 
 var getStyleFromScore = require('./getStyleFromScore');
-var getImageSource = require('./getImageSource');
 var getTextFromScore = require('./getTextFromScore');
 
 
@@ -37,11 +36,11 @@ var dispFields = ["性別", "年紀", "開放認養時間(起)", "所屬收容�
 
 var keys = ["animal_sex", "animal_age", "animal_opendate",  "shelter_name", "cDate"]
 
-class MovieCell extends React.Component {
+class AnimalCell extends React.Component {
   render() {
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + this.props.movie[keys[i]]}</Text>);
+      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + this.props.animal[keys[i]]}</Text>);
     }
 
     var TouchableElement = TouchableHighlight;
@@ -57,7 +56,7 @@ class MovieCell extends React.Component {
           <View style={styles.row}>
             <View style={styles.imgContainer}>
             <Image
-              source={{ uri: this.props.movie.album_file }}
+              source={{ uri: this.props.animal.album_file }}
               style={styles.cellImage}
               resizeMode='contain'
             />
@@ -79,13 +78,13 @@ var styles = StyleSheet.create({
   textContainer: {
     flex: 2,
   },
-  movieTitle: {
+  animalTitle: {
     flex: 1,
     fontSize: 16,
     fontWeight: '500',
     marginBottom: 2,
   },
-  movieYear: {
+  animalYear: {
     color: '#999999',
     fontSize: 12,
   },
@@ -106,4 +105,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = MovieCell;
+module.exports = AnimalCell;

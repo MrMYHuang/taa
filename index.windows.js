@@ -11,7 +11,7 @@
  * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * @providesModule MoviesApp
+ * @providesModule AnimalsAdoptionApp
  * @flow
  */
 'use strict';
@@ -24,12 +24,13 @@ var {
   Navigator,
   StyleSheet,
   View,
+  Text,
   Alert,
 } = ReactNative;
 import codePush from "react-native-code-push";
 
-var MovieScreen = require('./MovieScreen');
-var SearchScreen = require('./SearchScreen');
+var AnimalScreen = require('./AnimalScreen');
+var ListScreen = require('./ListScreen');
 var TitleBarWindows = require('./TitleBarWindows');
 var About = require('./About');
 
@@ -49,7 +50,7 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
   _navigator = navigationOperations;
   if (route.name === 'search') {
     return (
-      <SearchScreen navigator={navigationOperations}
+      <ListScreen navigator={navigationOperations}
         providerKey={route.providerKey}
       />
     );
@@ -64,22 +65,22 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
         <About
           style={{ flex: 1 }}
           navigator={navigationOperations}
-          movie={route.movie}
+          animal={route.animal}
         />
       </View>
     )
   }
-  else if (route.name === 'movie') {
+  else if (route.name === 'animal') {
     return (
       <View style={{ flex: 1 }}>
         <TitleBarWindows
           onPress={navigationOperations.pop}
           style={styles.toolbar}
-          title={route.movie.title} />
-        <MovieScreen
+          title={route.animal.title} />
+        <AnimalScreen
           style={{ flex: 1 }}
           navigator={navigationOperations}
-          movie={route.movie}
+          animal={route.animal}
         />
       </View>
     );
@@ -104,7 +105,7 @@ var styles = StyleSheet.create({
 
 var ProgressBar = require('ProgressBarWindows');
 
-class MoviesApp extends React.Component {
+class AnimalsAdoptionApp extends React.Component {
   constructor(props) {
     super(props);
     // Unfortunately, we can't set store to savedStore,
@@ -177,10 +178,10 @@ class MoviesApp extends React.Component {
 
 if (!(__DEV__)) {
   let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
-  MoviesApp = codePush(codePushOptions)(MoviesApp);
+  AnimalsAdoptionApp = codePush(codePushOptions)(AnimalsAdoptionApp);
   codePush.sync({ updateDialog: true })
 }
 
-AppRegistry.registerComponent('taa', () => MoviesApp);
+AppRegistry.registerComponent('taa', () => AnimalsAdoptionApp);
 
-module.exports = MoviesApp;
+module.exports = AnimalsAdoptionApp;
