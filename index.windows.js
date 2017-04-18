@@ -76,7 +76,7 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
         <TitleBarWindows
           onPress={navigationOperations.pop}
           style={styles.toolbar}
-          title={route.animal.title} />
+          title={route.title} />
         <AnimalScreen
           style={{ flex: 1 }}
           navigator={navigationOperations}

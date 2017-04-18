@@ -145,16 +145,17 @@ class ListScreen extends React.Component {
   }
 
   selectAnimal(animal: Object) {
+    const title = '流水編號：' + animal.animal_id
     if (Platform.OS === 'ios') {
       this.props.navigator.push({
-        title: animal.animal_id,
+        title: title,
         component: AnimalScreen,
         passProps: { animal },
       });
     } else {
       dismissKeyboard();
       this.props.navigator.push({
-        title: animal.animal_id,
+        title: title,
         name: 'animal',
         animal: animal,
       });
