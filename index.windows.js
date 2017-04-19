@@ -50,9 +50,7 @@ var RouteMapper = function (route, navigationOperations, onComponentRef) {
   _navigator = navigationOperations;
   if (route.name === 'search') {
     return (
-      <ListScreen navigator={navigationOperations}
-        providerKey={route.providerKey}
-      />
+      <ListScreen navigator={navigationOperations} />
     );
   }
   else if (route.name === 'about') {
@@ -106,28 +104,24 @@ var styles = StyleSheet.create({
 var ProgressBar = require('ProgressBarWindows');
 
 class AnimalsAdoptionApp extends React.Component {
+  savedStore = {}
+
   constructor(props) {
     super(props);
-    // Unfortunately, we can't set store to savedStore,
+    // Unfortunately, we can't immediately set store to savedStore,
     // because it contains async calls.
-    // We use useSavedStore for working around this issue.
+    // We use storeInited for working around this issue.
     this.state = {
-      providerKey: 0,
       showUpdateBar: false,
       updateProgress: 0,
-      store: blankStore
+      storeInited: false,
     }
     this.useSavedStore()
   }
 
   async useSavedStore() {
-    var savedStore = await getSavedStore()
-    // We can't modifiy Provider's store.
-    // Thus, we have to render a new Provider with a new key for using savedStore.
-    this.setState({
-      providerKey: this.state.providerKey + 1,
-      store: savedStore
-    })
+    this.savedStore = await getSavedStore()
+    this.setState({storeInited: true})
   }
 
   codePushStatusDidChange(status) {
@@ -159,9 +153,12 @@ class AnimalsAdoptionApp extends React.Component {
   }
 
   render() {
-    var initialRoute = { name: 'search', providerKey: this.state.providerKey };
+    if(!this.state.storeInited)
+      return <Text>Loading...</Text>
+
+    var initialRoute = { name: 'search' };
     return (
-      <Provider key={"provider" + this.state.providerKey} store={this.state.store}>
+      <Provider store={this.savedStore}>
         <View style={styles.container}>
           <Navigator
             style={styles.navigator}

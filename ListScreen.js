@@ -65,10 +65,7 @@ class ListScreen extends React.Component {
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
     }
-    // Don't call initScreen for  Provider with key == 0.
-    if (this.props.providerKey != 0) {
-      this.initScreen()
-    }
+    this.initScreen()
   }
 
   componentDidMount() {
@@ -267,7 +264,7 @@ class NoAnimals extends React.Component {
     } else if (!this.props.isLoading) {
       // If we're looking at the latest animals, aren't currently loading, and
       // still have no results, show a message
-      text = 'No data found';
+      text = 'Loading...';
     }
 
     return (
