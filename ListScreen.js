@@ -222,7 +222,7 @@ class ListScreen extends React.Component {
     if (this.state.isDownloading == 1)
       content = <View style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>
         <Text>資料庫下庫進度：</Text>
-        <ProgressBar style={{ height: 50 }} progress={this.state.updateProgress} />
+        <ProgressBar style={{ height: 50 }} progress={this.state.downloadPercent} />
         <Text>{Math.round(this.state.downloadedSize / 1024)} / {Math.round(this.state.downloadTotal / 1024)} KB</Text>
       </View>
     else
