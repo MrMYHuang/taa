@@ -45,8 +45,11 @@ var LOADING = {};
 
 import { NativeModules } from 'react-native'
 import { SaveStoreFile } from './StoreFile'
+import axios from 'axios'
 
 import { connect } from "react-redux"
+
+var ProgressBar = require('ProgressBarWindows');
 
 var animalFile = 'Animals.json'
 @connect((store) => {
@@ -64,6 +67,10 @@ class ListScreen extends React.Component {
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
+      isDownloading: false,
+      downloadedSize: 0,
+      downloadTotal: 0,
+      downloadPercent: 0
     }
     this.initScreen()
   }
@@ -87,12 +94,21 @@ class ListScreen extends React.Component {
   }
 
   async updateDb() {
-    fetch(API_URL)
-      .then((response) => {
-        return response.json()
-      })
-      .then(async (doc) => {
-        await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(doc))
+    let config = {
+      onDownloadProgress: progressEvent => {
+        let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+        this.setState({
+          isDownloading: true,
+          downloadedSize: progressEvent.loaded,
+          downloadTotal: progressEvent.total,
+          downloadPercent: percentCompleted
+        })
+      }
+    }
+
+    await axios.get(API_URL, config)
+      .then(async (res) => {
+        await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(res.data))
         var currTime = new Date()
         this.props.dispatch({
           type: "SET_KEY_VAL",
@@ -100,25 +116,12 @@ class ListScreen extends React.Component {
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
         await SaveStoreFile(this.props.store)
-        return doc
-      })
-      .catch((error) => {
-        this.setState({
-          dataSource: this.getDataSource()
-        });
-        return
-      })
-      .then((responseData) => {
-        if (responseData == null) {
-          return;
-        }
-        this.animals = responseData
-
+        this.animals = res.data
         this.setState({
           dataSource: this.getDataSource(),
-        });
+        })
+        this.setState({ isDownloading: false })
       })
-      .done();
   }
 
   getRandAnimals(): Array<any> {
@@ -215,11 +218,15 @@ class ListScreen extends React.Component {
   }
 
   render() {
-    var content = this.state.dataSource.getRowCount() === 0 ?
-      <NoAnimals
-        isLoading={this.state.isLoading}
-      /> :
-      <ListView
+    var content
+    if (this.state.isDownloading == 1)
+      content = <View style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: 'center' }}>
+        <Text>資料庫下庫進度：</Text>
+        <ProgressBar style={{ height: 50 }} progress={this.state.updateProgress} />
+        <Text>{Math.round(this.state.downloadedSize / 1024)} / {Math.round(this.state.downloadTotal / 1024)} KB</Text>
+      </View>
+    else
+      content = <ListView
         ref="listview"
         renderSeparator={this.renderSeparator.bind(this)}
         dataSource={this.state.dataSource}

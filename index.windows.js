@@ -176,7 +176,6 @@ class AnimalsAdoptionApp extends React.Component {
 if (!(__DEV__)) {
   let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };
   AnimalsAdoptionApp = codePush(codePushOptions)(AnimalsAdoptionApp);
-  codePush.sync({ updateDialog: true })
 }
 
 AppRegistry.registerComponent('taa', () => AnimalsAdoptionApp);

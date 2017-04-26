@@ -41,7 +41,11 @@ class About extends React.Component {
     const { animalDbDate } = this.props;
     return (
       <View>
+{(__DEV__) ? <Text>開發模式</Text> : null}
 <Text>{`*版本歷史：
+1.3.0:
+  * 新增下載資料庫會顯示進度。
+  * 修正更新進度有可能不顯示的問題。
 1.2.2:
   * 修正下載更新完成對話窗重複出現的bug。
 1.2.0:
@@ -57,8 +61,8 @@ class About extends React.Component {
         <Text>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
         <Text>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
         <Text>* 版權宣告：</Text>
-        <Text>  資料庫來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
-        <Text>  資料庫下載日期：{animalDbDate}</Text>
+        <Text>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
+        <Text>  動物資料庫下載日期：{animalDbDate}</Text>
         <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
       </View>
     );
