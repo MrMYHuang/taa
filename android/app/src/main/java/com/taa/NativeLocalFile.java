@@ -35,6 +35,17 @@ public class NativeLocalFile extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void FileExistAsync(String fileName, Promise promise)
+    {
+        boolean fileExist = false;
+
+        File f = new File(context.getFilesDir(), fileName);
+        if (f.exists())
+            fileExist = true;
+        promise.resolve(fileExist);
+    }
+
+    @ReactMethod
     public void SaveStrAsync(String fileName, String str, Promise promise) {
         try {
             OutputStreamWriter outputStreamWriter = new OutputStreamWriter(

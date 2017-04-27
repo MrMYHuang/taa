@@ -50,6 +50,8 @@ import axios from 'axios'
 import { connect } from "react-redux"
 
 var ProgressBar = require('ProgressBarWindows');
+if(Platform.OS == 'android')
+  ProgressBar = require('ProgressBarAndroid')
 
 var animalFile = 'Animals.json'
 @connect((store) => {
@@ -108,7 +110,10 @@ class ListScreen extends React.Component {
 
     await axios.get(API_URL, config)
       .then(async (res) => {
-        await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(res.data))
+        await NativeModules.NativeLocalFile.SaveStrAsync(animalFile, JSON.stringify(res.data)).catch(err => {
+          console.log('Fail to save file.')
+        })
+
         var currTime = new Date()
         this.props.dispatch({
           type: "SET_KEY_VAL",

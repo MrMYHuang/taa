@@ -8,14 +8,17 @@
     "bundle_uwp": "node node_modules/react-native/local-cli/cli.js bundle --dev false --platform windows --entry-file index.windows.js --bundle-output windows/taa/ReactAssets/index.windows.bundle --assets-dest windows/taa/ReactAssets",
     "cps_uwp": "code-push release-react taa-uwp windows",
     "cpp_uwp": "code-push promote taa-uwp Staging Production",
-    "build_apk": "cd android && gradlew assembleRelease"
+    "cps_and": "code-push release-react taa-android android",
+    "cpp_and": "code-push promote taa-android Staging Production",
+    "build_apk": "cd android && gradlew assembleRelease",
+    "install_apk": "adb install ./android/app/build/outputs/apk/app-release.apk"
   },
   "dependencies": {
     "axios": "^0.16.1",
-    "react": "15.4.2",
-    "react-native": "0.42.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "^0.43.4",
     "react-native-code-push": "^2.0.2-beta",
-    "react-native-windows": "^0.42.0-rc.2",
+    "react-native-windows": "^0.43.0-rc.0",
     "react-redux": "^5.0.4",
     "react-thunk": "^1.0.0",
     "redux": "^3.6.0",
