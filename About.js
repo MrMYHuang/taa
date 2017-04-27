@@ -43,6 +43,8 @@ class About extends React.Component {
       <View>
 {(__DEV__) ? <Text>開發模式</Text> : null}
 <Text>{`*版本歷史：
+1.4.0:
+  * 新增"我的最愛"功能。
 1.3.1:
   * 修正資料庫下載進度條顯示問題。
 1.3.0:

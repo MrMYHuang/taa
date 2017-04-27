@@ -50,14 +50,15 @@ import axios from 'axios'
 import { connect } from "react-redux"
 
 var ProgressBar = require('ProgressBarWindows');
-if(Platform.OS == 'android')
+if (Platform.OS == 'android')
   ProgressBar = require('ProgressBarAndroid')
 
 var animalFile = 'Animals.json'
 @connect((store) => {
   return {
     store: store,
-    animalDbDate: store.settings.animalDbDate
+    animalDbDate: store.settings.animalDbDate,
+    favorites: store.settings.favorites
   };
 })
 class ListScreen extends React.Component {
@@ -66,6 +67,7 @@ class ListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      listType: 0, // 0 random list, 1 favorite list
       dataSource: new ListView.DataSource({
         rowHasChanged: (row1, row2) => row1 !== row2,
       }),
@@ -86,9 +88,7 @@ class ListScreen extends React.Component {
     if (await NativeModules.NativeLocalFile.FileExistAsync(animalFile)) {
       var aDbStr = await NativeModules.NativeLocalFile.LoadStrAsync(animalFile)
       this.animals = JSON.parse(aDbStr)
-      this.setState({
-        dataSource: this.getDataSource(),
-      });
+      this.showRandomList()
     }
     else {
       await this.updateDb()
@@ -115,18 +115,44 @@ class ListScreen extends React.Component {
         })
 
         var currTime = new Date()
-        this.props.dispatch({
+        await this.props.dispatch({
           type: "SET_KEY_VAL",
           key: "animalDbDate",
           val: currTime.toLocaleDateString() + " " + currTime.toLocaleTimeString()
         })
         await SaveStoreFile(this.props.store)
         this.animals = res.data
-        this.setState({
-          dataSource: this.getDataSource(),
-        })
+        this.showRandomList()
         this.setState({ isDownloading: false })
       })
+  }
+
+  showRandomList() {
+    var animalIds = this.getRandAnimals()
+    var dispAnimals = []
+    for (var i = 0; i < animalIds.length; i++) {
+      dispAnimals.push(this.animals[animalIds[i]])
+    }
+    this.setState({ listType: 0, dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
+  }
+
+  showFavorites() {
+    const favorites = this.props.favorites
+    if(favorites == undefined) {
+      this.setState({ listType: 1, dataSource: this.state.dataSource.cloneWithRows([]) })
+      return
+    }
+
+    var dispAnimals = []
+    for (var i = 0; i < favorites.length; i++) {
+      for (var j = 0; j < this.animals.length; j++) {
+        if (this.animals[j]['animal_id'] == favorites[i]) {
+          dispAnimals.push(this.animals[j])
+          continue
+        }
+      }
+    }
+    this.setState({ listType: 1, dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
   }
 
   getRandAnimals(): Array<any> {
@@ -138,15 +164,6 @@ class ListScreen extends React.Component {
       animalIds.push(Math.floor(randNum))
     }
     return animalIds;
-  }
-
-  getDataSource(): ListView.DataSource {
-    var animalIds = this.getRandAnimals()
-    var dispAnimals = []
-    for (var i = 0; i < animalIds.length; i++) {
-      dispAnimals.push(this.animals[animalIds[i]])
-    }
-    return this.state.dataSource.cloneWithRows(dispAnimals);
   }
 
   selectAnimal(animal: Object) {
@@ -217,7 +234,9 @@ class ListScreen extends React.Component {
         onSelect={() => this.selectAnimal(animal)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
+        updateFavoList={() => this.showFavorites.bind(this)()}
         animal={animal}
+        listType={this.state.listType}
       />
     );
   }
@@ -246,10 +265,8 @@ class ListScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.buttonRow}>
           <Button style={styles.button} title='下載資料庫' onPress={this.updateDb.bind(this)} />
-          <Button style={styles.button} title='與我有緣' onPress={() =>
-            this.setState({
-              dataSource: this.getDataSource(),
-            })} />
+          <Button style={styles.button} title='與我有緣' onPress={this.showRandomList.bind(this)} />
+          <Button style={styles.button} title='我的最愛' onPress={this.showFavorites.bind(this)} />
           <Button style={styles.button} title='關於' onPress={this.go2about.bind(this)} />
         </View>
         <View style={styles.container2}>
