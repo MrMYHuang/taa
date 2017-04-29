@@ -120,7 +120,6 @@ class AnimalCell extends React.Component {
         </View>
         <View style={{ flex: 1 }}>
           <Button
-            style={{}}
             title={this.props.listType ? '-' : '+'}
             onPress={async () => this.modifyFavorites.bind(this)(this.props.listType, this.props.animal.animal_id)} />
         </View>

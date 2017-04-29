@@ -43,6 +43,8 @@ class About extends React.Component {
       <View>
 {(__DEV__) ? <Text>開發模式</Text> : null}
 <Text>{`*版本歷史：
+1.4.1:
+  * 解決有時"我的最愛"的按鈕非"刪除"的bug。
 1.4.0:
   * 新增"我的最愛"功能。
 1.3.1:

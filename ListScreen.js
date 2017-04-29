@@ -69,7 +69,8 @@ class ListScreen extends React.Component {
     this.state = {
       listType: 0, // 0 random list, 1 favorite list
       dataSource: new ListView.DataSource({
-        rowHasChanged: (row1, row2) => row1 !== row2,
+        // Always redrawing, because listType can be changed when row is unchanged.
+        rowHasChanged: (row1, row2) => true,
       }),
       isDownloading: false,
       downloadedSize: 0,
@@ -138,8 +139,9 @@ class ListScreen extends React.Component {
 
   showFavorites() {
     const favorites = this.props.favorites
-    if(favorites == undefined) {
-      this.setState({ listType: 1, dataSource: this.state.dataSource.cloneWithRows([]) })
+    this.setState({ listType: 1 })
+    if (favorites == undefined) {
+      this.setState({ dataSource: this.state.dataSource.cloneWithRows([]) })
       return
     }
 
@@ -152,7 +154,7 @@ class ListScreen extends React.Component {
         }
       }
     }
-    this.setState({ listType: 1, dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
+    this.setState({ dataSource: this.state.dataSource.cloneWithRows(dispAnimals) })
   }
 
   getRandAnimals(): Array<any> {
@@ -230,7 +232,6 @@ class ListScreen extends React.Component {
   ) {
     return (
       <AnimalCell
-        key={animal.id}
         onSelect={() => this.selectAnimal(animal)}
         onHighlight={() => highlightRowFunc(sectionID, rowID)}
         onUnhighlight={() => highlightRowFunc(null, null)}
