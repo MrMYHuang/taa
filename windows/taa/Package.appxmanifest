@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="40522Meng-YuanHuang.TaiwanAnimalAdoption" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.1.0.0" />
-  <mp:PhoneIdentity PhoneProductId="6ea6c151-1b88-4c71-9491-59ae4080e667" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="40522Meng-YuanHuang.TaiwanAnimalAdoption" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.1.1.0" />
+  <mp:PhoneIdentity PhoneProductId="a0099929-6698-40c3-aa21-d9658eb2b05d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Taiwan Animal Adoption</DisplayName>
     <PublisherDisplayName>Meng-Yuan Huang</PublisherDisplayName>
@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="taa.App">
       <uap:VisualElements DisplayName="Taiwan Animal Adoption" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="taa" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

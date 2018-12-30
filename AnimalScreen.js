@@ -19,14 +19,15 @@ var React = require('react');
 var ReactNative = require('react-native');
 var {
   Image,
-  ScrollView,
   StyleSheet,
   Text,
   View,
 } = ReactNative;
 
-var getStyleFromScore = require('./getStyleFromScore');
-var getTextFromScore = require('./getTextFromScore');
+import { ScrollView } from "react-native"
+
+//var getStyleFromScore = require('./getStyleFromScore');
+//var getTextFromScore = require('./getTextFromScore');
 
 var dispFields = ["流水編號", "區域編號", "所屬縣市代碼", "所屬收容所代碼", "實際所在地", "類型", "性別", "體型", "毛色", "年紀", "是否絕育", "是否施打狂犬病疫苗", "尋獲地", "網頁標題", "狀態", "資料備註", "其他說明", "開放認養時間(起)", "開放認養時間(迄)", "資料異動時間", "資料建立時間", "所屬收容所名稱", "圖片名稱(原始名稱)", "異動時間", "地址", "聯絡電話"]
 
@@ -35,16 +36,23 @@ var keys = ["animal_id", "animal_subid", "animal_area_pkid", "animal_shelter_pki
 
 class AnimalScreen extends React.Component {
   render() {
+    const { animal } = this.props.navigation.state.params;
+
+    var img = animal.album_file
+    if(img == '') {
+      img = 'white.png'
+    }
+    
     var rows = [];
     for (var i = 0; i < keys.length; i++) {
-      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + this.props.animal[keys[i]]}</Text>);
+      rows.push(<Text key={i} style={styles.text}>&bull; {dispFields[i] + "：" + animal[keys[i]]}</Text>);
     }
 
     return (
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.mainSection}>
           <Image
-            source={{ uri: this.props.animal.album_file }}
+            source={{ uri: img }}
             style={styles.detailsImage}
             resizeMode='contain'
           />
@@ -53,7 +61,7 @@ class AnimalScreen extends React.Component {
           {rows}
         </View>
       </ScrollView>
-    );
+    )    
   }
 }
 

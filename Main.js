@@ -21,70 +21,37 @@ var ReactNative = require('react-native');
 var {
     Platform,
     AppRegistry,
-    BackAndroid,
-    Navigator,
     StyleSheet,
     View,
     Text,
     Alert,
 } = ReactNative;
+
+import {
+    TabNavigator
+} from 'react-navigation';
+
 import codePush from "react-native-code-push";
 
-var AnimalScreen = require('./AnimalScreen');
-var ListScreen = require('./ListScreen');
-var TitleBarWindows =  require('./TitleBarWindows')
+var HomeScreen = require('./HomeScreen');
 var About = require('./About');
 
 import { Provider } from "react-redux"
 import { getSavedStore, blankStore } from "./store"
 
-var _navigator;
-BackAndroid.addEventListener('hardwareBackPress', () => {
-    if (_navigator && _navigator.getCurrentRoutes().length > 1) {
-        _navigator.pop();
-        return true;
-    }
-    return false;
-});
-
-var RouteMapper = function (route, navigationOperations, onComponentRef) {
-    _navigator = navigationOperations;
-    if (route.name === 'search') {
-        return (
-            <ListScreen navigator={navigationOperations} />
-        );
-    }
-    else if (route.name === 'about') {
-        return (
-            <View style={{ flex: 1 }}>
-                <TitleBarWindows
-                    onPress={navigationOperations.pop}
-                    style={styles.toolbar}
-                    title={"關於"} />
-                <About
-                    style={{ flex: 1 }}
-                    navigator={navigationOperations}
-                    animal={route.animal}
-                />
-            </View>
-        )
-    }
-    else if (route.name === 'animal') {
-        return (
-            <View style={{ flex: 1 }}>
-                <TitleBarWindows
-                    onPress={navigationOperations.pop}
-                    style={styles.toolbar}
-                    title={route.title} />
-                <AnimalScreen
-                    style={{ flex: 1 }}
-                    navigator={navigationOperations}
-                    animal={route.animal}
-                />
-            </View>
-        );
-    }
-};
+var MainNavigator = TabNavigator({
+    Home: { screen: HomeScreen},
+    About: { screen: About }
+}, {
+        tabBarPosition: 'bottom',
+        tabBarOptions: {
+            labelStyle: {
+                fontSize: 24,
+            }
+        },
+        lazy: true
+    })
+   
 
 var styles = StyleSheet.create({
     container: {
@@ -102,6 +69,7 @@ var styles = StyleSheet.create({
     },
 });
 
+/*
 var ProgressBar
 switch(Platform.OS ) {
     case 'windows':
@@ -109,7 +77,7 @@ switch(Platform.OS ) {
     case 'android':
         ProgressBar = require('ProgressBarAndroid'); break
 }
-
+*/
 
 class AnimalsAdoptionApp extends React.Component {
     savedStore = {}
@@ -162,22 +130,16 @@ class AnimalsAdoptionApp extends React.Component {
 
     render() {
         if (!this.state.storeInited)
-            return <Text>Loading...</Text>
+            return (<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><Text style={{textAlign: 'center', fontSize: 72}}>Loading...</Text></View>)
 
         var initialRoute = { name: 'search' };
         return (
             <Provider store={this.savedStore}>
                 <View style={styles.container}>
-                    <Navigator
-                        style={styles.navigator}
-                        initialRoute={initialRoute}
-                        configureScene={() => Navigator.SceneConfigs.FadeAndroid}
-                        renderScene={RouteMapper}
-                    />
-                    {this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />}
+                    <MainNavigator />
                 </View>
             </Provider>
-        );
+        );//{this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />
     }
 };
 

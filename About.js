@@ -37,12 +37,19 @@ import { connect } from "react-redux"
   };
 })
 class About extends React.Component {
+  static navigationOptions = {
+    title: '關於'
+  }
+
   render() {
     const { animalDbDate } = this.props;
     return (
       <View>
 {(__DEV__) ? <Text>開發模式</Text> : null}
 <Text>{`*版本歷史：
+1.5.0:
+  * 更新資料來源。
+  * 更新NodeJS package。
 1.4.1:
   * 解決有時"我的最愛"的列表項目按鈕非"刪除"的bug。
 1.4.0:

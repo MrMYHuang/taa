@@ -96,6 +96,12 @@ class AnimalCell extends React.Component {
     if (Platform.OS === 'android') {
       TouchableElement = TouchableNativeFeedback;
     }
+
+    var img = this.props.animal.album_file
+    if(img == '') {
+      img = 'white.png'
+    }
+
     return (
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <View style={{ flex: 9 }}>
@@ -107,7 +113,7 @@ class AnimalCell extends React.Component {
             <View style={styles.row}>
               <View style={styles.imgContainer}>
                 <Image
-                  source={{ uri: this.props.animal.album_file }}
+                  source={{ uri: img}}
                   style={styles.cellImage}
                   resizeMode='contain'
                 />

@@ -39,7 +39,7 @@ var AnimalScreen = require('./AnimalScreen');
  * In case you want to use the Rotten Tomatoes' API on a real app you should
  * create an account at http://developer.rottentomatoes.com/
  */
-var API_URL = 'http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx'
+var API_URL = 'http://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL'
 
 var LOADING = {};
 
@@ -62,6 +62,10 @@ var animalFile = 'Animals.json'
   };
 })
 class ListScreen extends React.Component {
+  static navigationOptions = {
+    title: '動物'
+  }
+
   timeoutID = null
 
   constructor(props) {
@@ -78,9 +82,6 @@ class ListScreen extends React.Component {
       downloadPercent: 0
     }
     this.initScreen()
-  }
-
-  componentDidMount() {
   }
 
   animals = []
@@ -170,35 +171,11 @@ class ListScreen extends React.Component {
 
   selectAnimal(animal: Object) {
     const title = '流水編號：' + animal.animal_id
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: title,
-        component: AnimalScreen,
-        passProps: { animal },
-      });
-    } else {
-      dismissKeyboard();
-      this.props.navigator.push({
-        title: title,
-        name: 'animal',
-        animal: animal,
-      });
-    }
-  }
-
-  go2about() {
-    if (Platform.OS === 'ios') {
-      this.props.navigator.push({
-        title: '關於',
-        component: AnimalScreen,
-      });
-    } else {
-      dismissKeyboard();
-      this.props.navigator.push({
-        title: '關於',
-        name: 'about'
-      });
-    }
+    this.props.navigation.navigate("Detail", {
+      title: title,
+      name: 'animal',
+      animal: animal,
+    })
   }
 
   renderFooter() {
@@ -268,7 +245,6 @@ class ListScreen extends React.Component {
           <Button style={styles.button} title='下載資料庫' onPress={this.updateDb.bind(this)} />
           <Button style={styles.button} title='與我有緣' onPress={this.showRandomList.bind(this)} />
           <Button style={styles.button} title='我的最愛' onPress={this.showFavorites.bind(this)} />
-          <Button style={styles.button} title='關於' onPress={this.go2about.bind(this)} />
         </View>
         <View style={styles.container2}>
           {content}
