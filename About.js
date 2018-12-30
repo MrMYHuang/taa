@@ -47,6 +47,8 @@ class About extends React.Component {
       <View>
 {(__DEV__) ? <Text>開發模式</Text> : null}
 <Text>{`*版本歷史：
+1.5.1:
+  * 修正CodePush。
 1.5.0:
   * 更新資料來源。
   * 更新NodeJS package。
