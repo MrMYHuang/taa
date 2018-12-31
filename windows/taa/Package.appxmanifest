@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="40522Meng-YuanHuang.TaiwanAnimalAdoption" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.5.0.0" />
+  <Identity Name="40522Meng-YuanHuang.TaiwanAnimalAdoption" Publisher="CN=5190CF16-8C6F-4DE3-AD94-D8E3FBB2302B" Version="1.5.2.0" />
   <mp:PhoneIdentity PhoneProductId="a0099929-6698-40c3-aa21-d9658eb2b05d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Taiwan Animal Adoption</DisplayName>

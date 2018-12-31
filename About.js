@@ -22,6 +22,7 @@ var {
   Platform,
   StyleSheet,
   Text,
+  ScrollView,
   TouchableHighlight,
   TouchableNativeFeedback,
   View,
@@ -44,9 +45,11 @@ class About extends React.Component {
   render() {
     const { animalDbDate } = this.props;
     return (
-      <View>
-{(__DEV__) ? <Text>開發模式</Text> : null}
-<Text>{`*版本歷史：
+      <ScrollView style={{marginLeft: 5, marginRight: 5}}>  
+{(__DEV__) ? <Text style={styles.text}>開發模式</Text> : null}
+<Text style={styles.text}>{`*版本歷史：
+1.5.2:
+  * 修復UWP版。
 1.5.1:
   * 修正CodePush。
 1.5.0:
@@ -72,14 +75,14 @@ class About extends React.Component {
 1.0.8：
   * 第一版。`}</Text>
         <Text />
-        <Text>* 作者：Meng-Yuan Huang</Text>
-        <Text>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
-        <Text>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
-        <Text>* 版權宣告：</Text>
-        <Text>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
-        <Text>  動物資料庫下載日期：{animalDbDate}</Text>
-        <Text>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
-      </View>
+        <Text style={styles.text}>* 作者：Meng-Yuan Huang</Text>
+        <Text style={styles.text}>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+        <Text style={styles.text}>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
+        <Text style={styles.text}>* 版權宣告：</Text>
+        <Text style={styles.text}>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
+        <Text style={styles.text}>  動物資料庫下載日期：{animalDbDate}</Text>
+        <Text style={styles.text}>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
+      </ScrollView>
     );
   }
 }
@@ -90,7 +93,10 @@ var styles = StyleSheet.create({
   },
   textContainer: {
     flex: 2,
-  }
+  },
+  text: {
+    fontSize: 24
+  },
 });
 
 module.exports = About;

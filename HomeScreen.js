@@ -1,17 +1,17 @@
 var ListScreen = require('./ListScreen');
 var AnimalScreen = require('./AnimalScreen');
-import { StackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
-const HomeScreen = StackNavigator ({
+const HomeScreen = createStackNavigator ({
     List: { screen: ListScreen },
     Detail: {screen: AnimalScreen}
-  }, {
-    navigationOptions: {
-      title: '首頁'
-    },
-      
+  }, {      
     lazy: true
   });
+
+  HomeScreen.navigationOptions = {
+    title: '首頁'
+  }
 
  module.exports = HomeScreen
  

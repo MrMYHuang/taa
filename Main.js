@@ -28,7 +28,7 @@ var {
 } = ReactNative;
 
 import {
-    TabNavigator
+    createBottomTabNavigator
 } from 'react-navigation';
 
 import codePush from "react-native-code-push";
@@ -39,7 +39,7 @@ var About = require('./About');
 import { Provider } from "react-redux"
 import { getSavedStore, blankStore } from "./store"
 
-var MainNavigator = TabNavigator({
+var MainNavigator = createBottomTabNavigator({
     Home: { screen: HomeScreen},
     About: { screen: About }
 }, {
