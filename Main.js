@@ -69,7 +69,6 @@ var styles = StyleSheet.create({
     },
 });
 
-/*
 var ProgressBar
 switch(Platform.OS ) {
     case 'windows':
@@ -77,7 +76,6 @@ switch(Platform.OS ) {
     case 'android':
         ProgressBar = require('ProgressBarAndroid'); break
 }
-*/
 
 class AnimalsAdoptionApp extends React.Component {
     savedStore = {}
@@ -88,6 +86,7 @@ class AnimalsAdoptionApp extends React.Component {
         // because it contains async calls.
         // We use storeInited for working around this issue.
         this.state = {
+            updateMsg: '',
             showUpdateBar: false,
             updateProgress: 0,
             storeInited: false,
@@ -102,7 +101,7 @@ class AnimalsAdoptionApp extends React.Component {
 
     codePushStatusDidChange(status) {
         switch (status) {
-            /*
+            
             case codePush.SyncStatus.CHECKING_FOR_UPDATE:
               console.log("Checking for updates.");
               break;
@@ -115,7 +114,7 @@ class AnimalsAdoptionApp extends React.Component {
             case codePush.SyncStatus.UP_TO_DATE:
               console.log("Up-to-date.");
               break;
-            */
+            
             case codePush.SyncStatus.UPDATE_INSTALLED:
                 Alert.alert("下載更新完成", "請重新啟動app。")
                 break;
@@ -130,18 +129,23 @@ class AnimalsAdoptionApp extends React.Component {
 
     render() {
         if (!this.state.storeInited)
-            return (<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><Text style={{textAlign: 'center', fontSize: 72}}>Loading...</Text></View>)
+            return (
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={{textAlign: 'center', fontSize: 72}}>Loading...</Text>
+            </View>
+            )
 
-        var initialRoute = { name: 'search' };
         return (
             <Provider store={this.savedStore}>
                 <View style={styles.container}>
                     <MainNavigator />
+                    {this.state.showUpdateBar && <ProgressBar style={{height: 50}} progress={this.state.updateProgress} />}
+                    <Text>{this.state.updateMsg}</Text>
                 </View>
             </Provider>
-        );//{this.state.showUpdateBar && <ProgressBar style={styles.toolbar} progress={this.state.updateProgress} />
+        )
     }
-};
+}
 
 if (!(__DEV__)) {
     let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_START, updateDialog: codePush.DEFAULT_UPDATE_DIALOG };

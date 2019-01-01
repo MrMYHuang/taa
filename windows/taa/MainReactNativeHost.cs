@@ -19,17 +19,22 @@ namespace taa
         protected override string JavaScriptMainModuleName => "index";
 
 #if BUNDLE
-        protected override string JavaScriptBundleFile => "ms-appx:///ReactAssets/index.windows.bundle";
-        /*
         CodePushReactPackage codePushReactPackage;
+
+        public MainReactNativeHost()
+        {
+            codePushReactPackage = new CodePushReactPackage("deployment-key-here", this);
+        }
+
         protected override string JavaScriptBundleFile
         {
             get
             {
-                codePushReactPackage = new CodePushReactPackage("deployment-key-here", this);
                 return codePushReactPackage.GetJavaScriptBundleFile();
             }
-        }*/
+        }
+#else            
+        protected override string JavaScriptBundleFile => "ms-appx:///ReactAssets/index.windows.bundle";
 #endif
 
         protected override List<IReactPackage> Packages
@@ -42,7 +47,6 @@ namespace taa
                     new TaaReactPackage()
                 };
 #if BUNDLE
-                var codePushReactPackage = new CodePushReactPackage("deployment-key-here", this);
                 rpl.Add(codePushReactPackage);
 #endif
                 return rpl;

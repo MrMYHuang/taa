@@ -45,9 +45,18 @@ class About extends React.Component {
   render() {
     const { animalDbDate } = this.props;
     return (
-      <ScrollView style={{marginLeft: 5, marginRight: 5}}>  
+      <ScrollView style={{marginLeft: 5, marginRight: 5}}>
 {(__DEV__) ? <Text style={styles.text}>開發模式</Text> : null}
+<Text style={styles.text}>* 作者：Meng-Yuan Huang</Text>
+<Text style={styles.text}>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
+<Text style={styles.text}>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
+<Text style={styles.text}>* 版權宣告：</Text>
+<Text style={styles.text}>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
+<Text style={styles.text}>  動物資料庫下載日期：{animalDbDate}</Text>
+<Text style={styles.text}>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
 <Text style={styles.text}>{`*版本歷史：
+1.5.3:
+  * 修復UWP版CodePush功能。
 1.5.2:
   * 修復UWP版。
 1.5.1:
@@ -74,14 +83,6 @@ class About extends React.Component {
   * 關於頁面顯示上次下載資料之時間。
 1.0.8：
   * 第一版。`}</Text>
-        <Text />
-        <Text style={styles.text}>* 作者：Meng-Yuan Huang</Text>
-        <Text style={styles.text}>* 作者信箱：<HyperLink>mailto:myhDev@live.com</HyperLink></Text>
-        <Text style={styles.text}>* App開放原始碼：<HyperLink>https://github.com/MrMYHuang/taa</HyperLink></Text>
-        <Text style={styles.text}>* 版權宣告：</Text>
-        <Text style={styles.text}>  動物資料來源：<HyperLink>http://data.gov.tw/node/9842</HyperLink></Text>
-        <Text style={styles.text}>  動物資料庫下載日期：{animalDbDate}</Text>
-        <Text style={styles.text}>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
       </ScrollView>
     );
   }
