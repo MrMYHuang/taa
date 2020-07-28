@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.2.3",
-    "axios": "^0.16.1",
+    "axios": "^0.19.2",
     "create-react-class": "^15.6.3",
     "react": "16.6.3",
     "react-native": "0.57.8",
