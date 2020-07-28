@@ -55,6 +55,8 @@ class About extends React.Component {
 <Text style={styles.text}>  動物資料庫下載日期：{animalDbDate}</Text>
 <Text style={styles.text}>  Logo來源：<HyperLink>http://www.freepik.com</HyperLink></Text>
 <Text style={styles.text}>{`*版本歷史：
+1.5.4:
+  * 更新API路徑。
 1.5.3:
   * 修復UWP版CodePush功能。
 1.5.2:

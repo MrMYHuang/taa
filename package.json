@@ -9,8 +9,9 @@
     "cps_uwp": "appcenter codepush release-react -a myh/taa-uwp",
     "cpp_uwp": "appcenter codepush promote -a myh/taa-uwp -s Staging -d Production",
     "cps_and": "appcenter codepush release-react -a myh/taa-and",
-    "build_apk": "cd android && gradlew assembleRelease",
     "cpp_and": "appcenter codepush promote -a myh/taa-and -s Staging -d Production",
+    "bundle_and": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "build_apk": "cd android && gradlew assembleRelease",
     "install_apk": "adb install ./android/app/build/outputs/apk/release/app-release.apk"
   },
   "dependencies": {
