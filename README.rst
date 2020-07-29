@@ -36,3 +36,7 @@ Recommended Tools:
 - JS Debugger: `Chrome <https://www.google.com/chrome/>`_
 - UWP IDE: `Visual Studio Community 2017 <https://www.visualstudio.com/downloads/>`_
 - Android IDE: `Android Studio <https://developer.android.com/studio/index.html>`_
+
+Privacy Policy:
+=============================
+This app doesn't collect any privacy data of user.
