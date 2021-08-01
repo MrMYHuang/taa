@@ -56,6 +56,5 @@ fastlane/screenshots
 *.bundle
 *.pfx
 .vscode
-*.png
 *.appx
 windows/taa/Package.StoreAssociation.xml

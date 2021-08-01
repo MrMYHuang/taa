@@ -1,0 +1,29 @@
+{
+  "short_name": "動物認養",
+  "name": "動物認養",
+  "icons": [
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    },
+    {
+      "src": "assets/icon/icon.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "maskable"
+    }
+  ],
+  "scope": "/taa/",
+  "start_url": "/taa/",
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "認養動物",
+      "url": "/taa/animals",
+      "icons": [{ "src": "assets/icon/icon.png", "sizes": "1024x1024" }]
+    }
+  ],
+  "theme_color": "black",
+  "background_color": "black"
+}
