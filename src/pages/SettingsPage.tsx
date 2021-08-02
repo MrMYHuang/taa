@@ -282,7 +282,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={helpCircle} slot='start' />
               <div className='uiFont'>
                 <div>關於</div>
-                {isPlatform('android') || isPlatform('ios') ?
+                {isPlatform('android') || isPlatform('ios') || isPlatform('electron') ?
                   <></>
                   :
                   <div><a href="https://github.com/MrMYHuang/taa#web-app" target="_new">程式安裝說明</a></div>
