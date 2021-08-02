@@ -3,13 +3,13 @@
   "homepage": "/taa",
   "productName": "Taiwan Animal Adoption",
   "pwaVersion": "2.0.0",
-  "version": "0.0.1",
+  "version": "2.0.0",
   "license": "MIT",
   "keywords": [
-    "",
-    ""
+    "動物認養",
+    "台灣"
   ],
-  "description": "",
+  "description": "隨機呈現台灣待認養動物資訊",
   "repository": "https://github.com/MrMYHuang/taa",
   "author": {
     "name": "Meng-Yuan Huang",
@@ -30,7 +30,7 @@
     "build-electron": "tsc -b tsconfigElectron.json",
     "build-electron-store": "tsc -b tsconfigElectron.json && mv buildElectron/mainStore.js buildElectron/main.js",
     "start-electron": "npm run build-electron && electron .",
-    "dist-snap": "npm run build-electron-store && rm -f dist/*.snap && electron-builder -l snap -c electronBuilderConfigs/snap.json",
+    "dist-snap": "npm run build-electron-store && rm -f dist/*.snap && electron-builder -l snap -c electronBuilderConfigs/snap.json -c.extraMetadata.name=twaa",
     "publish-snap": "snapcraft upload --release=stable dist/*.snap",
     "icons-mas": "cd buildElectron && iconutil -c icns icon.iconset",
     "dist-mas": "npm run build-electron-store && electron-builder -m mas -c electronBuilderConfigs/mas.json",

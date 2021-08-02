@@ -12,7 +12,7 @@
       "filter": ["IsSnap.txt"]
     }
   ],
-  "icon": "buildElectron/icon.png",
+  "icon": "public/assets/icon/icon.png",
   "snap": {
     "artifactName": "${name}_${version}_linux64.${ext}",
     "category": "public.app-category.education"

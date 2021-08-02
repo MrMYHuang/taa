@@ -29,6 +29,10 @@ build/
 .gradle
 local.properties
 *.iml
+dist
+buildElectron/*.js
+buildElectron/*.map
+
 
 # node.js
 #
