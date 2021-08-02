@@ -24,7 +24,6 @@ project.xcworkspace
 
 # Android/IntelliJ
 #
-build/
 .idea
 .gradle
 local.properties
@@ -62,3 +61,4 @@ fastlane/screenshots
 .vscode
 *.appx
 windows/taa/Package.StoreAssociation.xml
+*.provisionprofile
