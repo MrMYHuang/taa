@@ -78,6 +78,8 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* 2.0.1:
+  * 移除 app 內的程式安裝連結，以符合 iOS 上架規範。
 * 2.0.0:
   * 改寫成 PWA。
 * 1.5.5:

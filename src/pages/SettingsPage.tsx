@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonRange, IonIcon, IonLabel, IonToggle, IonButton, IonAlert, IonSelect, IonSelectOption, IonToast, withIonLifeCycle, IonProgressBar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonRange, IonIcon, IonLabel, IonToggle, IonButton, IonAlert, IonSelect, IonSelectOption, IonToast, withIonLifeCycle, IonProgressBar, isPlatform } from '@ionic/react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import Globals from '../Globals';
@@ -282,7 +282,11 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={helpCircle} slot='start' />
               <div className='uiFont'>
                 <div>關於</div>
-                <div><a href="https://github.com/MrMYHuang/taa#web-app" target="_new">程式安裝說明</a></div>
+                {isPlatform('android') || isPlatform('ios') || isPlatform('electron') ?
+                  <></>
+                  :
+                  <div><a href="https://github.com/MrMYHuang/taa#web-app" target="_new">程式安裝說明</a></div>
+                }
                 <div><a href="https://github.com/MrMYHuang/taa" target="_new">操作說明與開放原始碼</a></div>
                 <div>作者: Meng-Yuan Huang</div>
                 <div><a href="mailto:myh@live.com" target="_new">myh@live.com</a></div>
