@@ -208,6 +208,9 @@ const Globals = {
   isTouchDevice: () => {
     return (isPlatform('ios') && !isMacCatalyst()) || isPlatform('android');
   },
+  isStoreApps: () => {
+    return isPlatform('pwa') || isPlatform('electron');
+  },
   clearAppData,
   copyToClipboard,
 };
