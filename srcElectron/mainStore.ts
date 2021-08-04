@@ -116,7 +116,6 @@ async function createWindow() {
       await new Promise<any>(async (ok, fail) => {
         mainWindow?.webContents.once('did-finish-load', (res: any) => {
           loadUrlSuccess = true;
-          mainWindow?.webContents.removeAllListeners();
           ok('');
         });
         mainWindow?.webContents.once('did-fail-load', (event, errorCode, errorDescription) => {

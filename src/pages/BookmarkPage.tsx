@@ -31,8 +31,8 @@ const helpDoc = Globals.isStoreApps() ?
   <></>
   :
   <>
-    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#web-app" target="_new">程式安裝說明</a></div>
-    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#shortcuts" target="_new">程式捷徑</a></div>
+    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#web-app" target="_blank" rel="noreferrer">程式安裝說明</a></div>
+    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#shortcuts" target="_blank" rel="noreferrer">程式捷徑</a></div>
   </>;
 
 class _BookmarkPage extends React.Component<PageProps, State> {

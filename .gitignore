@@ -58,7 +58,6 @@ fastlane/screenshots
 .vs
 *.bundle
 *.pfx
-.vscode
 *.appx
 windows/taa/Package.StoreAssociation.xml
 *.provisionprofile

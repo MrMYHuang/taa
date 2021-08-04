@@ -81,7 +81,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                 if (!hasUpdate) {
                   this.setState({ showToast: true, toastMessage: 'App 已是最新版' });
                 }*/
-              }}>PWA 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_new">{PackageInfos.pwaVersion}</a></IonLabel>
+              }}>PWA 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel="noreferrer">{PackageInfos.pwaVersion}</a></IonLabel>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={e => {
                 this.props.dispatch({
                   type: "TMP_SET_KEY_VAL",
@@ -103,7 +103,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
             <IonItem>
               <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
               <IonIcon icon={bug} slot='start' />
-              <IonLabel className='ion-text-wrap uiFont'><a href="https://github.com/MrMYHuang/taa#report" target="_new">啟用app異常記錄</a></IonLabel>
+              <IonLabel className='ion-text-wrap uiFont'><a href="https://github.com/MrMYHuang/taa#report" target="_blank" rel="noreferrer">啟用app異常記錄</a></IonLabel>
               <IonToggle slot='end' checked={this.props.hasAppLog} onIonChange={e => {
                 const isChecked = e.detail.checked;
 
@@ -284,9 +284,9 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={helpCircle} slot='start' />
               <div className='uiFont'>
                 <div>關於</div>
-                <div><a href="https://github.com/MrMYHuang/taa" target="_new">操作說明與開放原始碼</a></div>
+                <div><a href="https://github.com/MrMYHuang/taa" target="_blank" rel="noreferrer">操作說明與開放原始碼</a></div>
                 <div>作者: Meng-Yuan Huang</div>
-                <div><a href="mailto:myh@live.com" target="_new">myh@live.com</a></div>
+                <div><a href="mailto:myh@live.com" target="_blank" rel="noreferrer">myh@live.com</a></div>
               </div>
             </IonItem>
           </IonList>
