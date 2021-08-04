@@ -73,6 +73,7 @@ https://myhpwa.github.io/taa
 ## <a id='history'>版本歷史</a>
 * 2.0.3:
   * 修正 Electron app 無法開啟外部連結的 bug。
+  * Electron app 加入視窗選單，以符合 Mac App Store 上架規範。
 * 2.0.2:
   * 移除設定頁 app 更新通知功能，以符合 Mac App Store 上架規範。
 * 2.0.1:
