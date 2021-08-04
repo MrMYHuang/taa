@@ -91,7 +91,7 @@ const template = [
         role: 'close'
       }
     ].filter(v => v != null) as any
-  })
+  }),
 ];
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
@@ -128,6 +128,11 @@ async function createWindow() {
     }
   });
 
+  const clearListeners = () => {
+    mainWindow?.webContents.removeAllListeners('did-finish-load');
+    mainWindow?.webContents.removeAllListeners('did-fail-load');
+  }
+
   // and load the index.html of the app.
   //mainWindow.loadFile('index.html');
   let loadUrlSuccess = false;
@@ -136,9 +141,11 @@ async function createWindow() {
       await new Promise<any>(async (ok, fail) => {
         mainWindow?.webContents.once('did-finish-load', (res: any) => {
           loadUrlSuccess = true;
+          clearListeners();
           ok('');
         });
         mainWindow?.webContents.once('did-fail-load', (event, errorCode, errorDescription) => {
+          clearListeners();
           fail(`Error ${errorCode}: ${errorDescription}`);
         });
 
@@ -153,7 +160,7 @@ async function createWindow() {
         }
       });
     } catch (error) {
-      mainWindow?.webContents.removeAllListeners();
+      clearListeners();
       console.error(error);
       const buttonId = dialog.showMessageBoxSync(mainWindow!, {
         message: `網路連線異常，請重試！\n${error}`,
