@@ -79,6 +79,11 @@ https://myhpwa.github.io/taa
 <img width="auto" height='60px' src='https://github.com/MrMYHuang/taa/raw/master/docs/images/Download_on_the_App_Store_Badge_CNTC_RGB_blk_100217.svg'/>
 </a>
 
+#### macOS 10.10+ - 使用 Apple App Store
+<a href='https://apps.apple.com/app/id1579232521' target='_blank'>
+<img width="auto" height='60px' src='https://github.com/MrMYHuang/twri/raw/main/docs/images/Download_on_the_Mac_App_Store_Badge_CNTC_RGB_blk_100217.svg'/>
+</a>
+
 #### Windows 10 - 使用 Microsoft Store
 <a href='https://www.microsoft.com/store/apps/9PH0CQ23ZKS5' target='_blank'>
 <img width="auto" height='60px' src='https://developer.microsoft.com/store/badges/images/Chinese-Traditional_get-it-from-MS.png' alt='Chinese Traditional badge'/>
