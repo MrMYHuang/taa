@@ -70,7 +70,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
         </IonHeader>
         <IonContent>
           <IonList>
-            <IonItem>
+            <IonItem hidden={Globals.isMac()}>
               <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
               <IonIcon icon={shareSocial} slot='start' />
               <IonLabel className='ion-text-wrap uiFont' onClick={async e => {
@@ -93,7 +93,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                 });
               }}>分享</IonButton>
             </IonItem>
-            <IonItem hidden={!this.props.mainVersion}>
+            <IonItem hidden={!this.props.mainVersion || Globals.isMac()}>
               <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
               <IonIcon icon={informationCircle} slot='start' />
               <IonLabel className='ion-text-wrap uiFont'>Backend app版本: {this.props.mainVersion}</IonLabel>
@@ -103,7 +103,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
             <IonItem>
               <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
               <IonIcon icon={bug} slot='start' />
-              <IonLabel className='ion-text-wrap uiFont'><a href="https://github.com/MrMYHuang/taa#report" target="_blank" rel="noreferrer">啟用app異常記錄</a></IonLabel>
+              <IonLabel className='ion-text-wrap uiFont'>啟用app異常記錄</IonLabel>
               <IonToggle slot='end' checked={this.props.hasAppLog} onIonChange={e => {
                 const isChecked = e.detail.checked;
 
@@ -284,7 +284,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={helpCircle} slot='start' />
               <div className='uiFont'>
                 <div>關於</div>
-                <div><a href="https://github.com/MrMYHuang/taa" target="_blank" rel="noreferrer">操作說明與開放原始碼</a></div>
+                <div hidden={Globals.isMac()}><a href="https://github.com/MrMYHuang/taa" target="_blank" rel="noreferrer">操作說明與開放原始碼</a></div>
                 <div>作者: Meng-Yuan Huang</div>
                 <div><a href="mailto:myh@live.com" target="_blank" rel="noreferrer">myh@live.com</a></div>
               </div>

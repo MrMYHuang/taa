@@ -211,6 +211,9 @@ const Globals = {
   isStoreApps: () => {
     return isPlatform('pwa') || isPlatform('electron');
   },
+  isMac: () => {
+    return navigator.platform === 'MacIntel';
+  },
   clearAppData,
   copyToClipboard,
 };
