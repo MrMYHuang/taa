@@ -40,8 +40,9 @@ const filters: Filter[] = [
 
 class FilterSel {
   id: number = 0;
-  key: string = '';
+  key: string = 'animal_kind';
   search: string = '';
+
 }
 
 interface Props {
@@ -104,7 +105,7 @@ class _ListScreen extends React.Component<PageProps, State> {
 
     const animalsLength = this.animalsFiltered.length;
 
-    const animalsRandomlySelected = (new Array(this.rows).fill(0)).map(v => this.animalsFiltered[Math.floor(Math.random() * animalsLength)]);
+    const animalsRandomlySelected = (new Array(this.rows).fill(0)).map(v => this.animalsFiltered[Math.floor(Math.random() * animalsLength)]).filter(a => a != null);
 
     this.page += 1;
     this.setState({
@@ -119,18 +120,11 @@ class _ListScreen extends React.Component<PageProps, State> {
     this.props.history.push(`${Globals.pwaUrl}/${this.props.match.params.tab}/${animalId}`);
   }
 
-  selectRefs: React.RefObject<HTMLIonSelectElement>[] = [];
-  inputRefs: React.RefObject<HTMLIonInputElement>[] = [];
   renderFilterRows() {
-    this.selectRefs = [];
-    this.inputRefs = [];
     return this.state.filtersSel.map((fs, i) => {
-      this.selectRefs.push(React.createRef<HTMLIonSelectElement>());
-      this.inputRefs.push(React.createRef<HTMLIonInputElement>());
       return <IonItem className='uiFont' key={`filterRow${i}`}>
         <IonLabel className='uiFont'>條件：</IonLabel>
         <IonSelect
-          ref={this.selectRefs[i]}
           value={this.state.filtersSel[i].id}
           className='uiFont ionSelect'
           interface='popover'
@@ -158,11 +152,15 @@ class _ListScreen extends React.Component<PageProps, State> {
         </IonSelect>
 
         <IonLabel className='uiFont'>符合：</IonLabel>
-        <IonInput ref={this.inputRefs[i]} value={this.state.filtersSel[i].search} className='ionInput' onIonChange={e => {
-          let filtersSel = this.state.filtersSel;
-          filtersSel[i].search = e.detail.value || '';
-          this.setState({ filtersSel })
-        }}></IonInput>
+        <IonInput
+          value={this.state.filtersSel[i].search}
+          className='ionInput'
+          clearInput={true}
+          onIonChange={e => {
+            let filtersSel = this.state.filtersSel;
+            filtersSel[i].search = e.detail.value || '';
+            this.setState({ filtersSel })
+          }}></IonInput>
 
         <IonButton fill='outline' shape='round' size='large' className='uiFont' onClick={e => {
           this.state.filtersSel.splice(i, 1);

@@ -98,6 +98,10 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* 2.1.1:
+  * 修正 bug。
+* 2.1.0:
+  * 支援多重篩選功能。
 * 2.0.4:
   * MAS app 設定頁移除版本資訊，以符合 Mac App Store 上架規範。
 * 2.0.3:
