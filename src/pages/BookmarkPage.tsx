@@ -49,7 +49,7 @@ class _BookmarkPage extends React.Component<PageProps, State> {
 
   ionViewWillEnter() {
     if (!this.hasBookmark) {
-      this.setState({ showToast: true, toastMessage: '無書籤！請將診間加至書籤。' });
+      this.setState({ showToast: true, toastMessage: '無書籤！請至動物詳細資料新增書籤。' });
       this.props.history.push(`${Globals.pwaUrl}/animals`);
     }
     //console.log( 'view will enter' );
