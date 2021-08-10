@@ -9,9 +9,34 @@ import { TmpSettings } from '../models/TmpSettings';
 import './Pages.css';
 import { arrowBack, bookmark, shareSocial } from 'ionicons/icons';
 
-var dispFields = ["流水編號", "區域編號", "所屬縣市代碼", "所屬收容所代碼", "實際所在地", "類型", "性別", "體型", "毛色", "年紀", "是否絕育", "是否施打狂犬病疫苗", "尋獲地", "網頁標題", "狀態", "資料備註", "其他說明", "開放認養時間(起)", "開放認養時間(迄)", "資料異動時間", "資料建立時間", "所屬收容所名稱", "圖片名稱(原始名稱)", "異動時間", "地址", "聯絡電話"];
-
-var keys = ["animal_id", "animal_subid", "animal_area_pkid", "animal_shelter_pkid", "animal_place", "animal_kind", "animal_sex", "animal_bodytype", "animal_colour", "animal_age", "animal_sterilization", "animal_bacterin", "animal_foundplace", "animal_title", "animal_status", "animal_remark", "animal_caption", "animal_opendate", "animal_closeddate", "animal_update", "animal_createtime", "shelter_name", "album_name", "cDate", "shelter_address", "shelter_tel"];
+var displayItems = [
+  { field: "類型", key: "animal_kind" },
+  { field: "性別", key: "animal_sex" },
+  { field: "體型", key: "animal_bodytype" },
+  { field: "毛色", key: "animal_colour" },
+  { field: "年紀", key: "animal_age" },
+  { field: "狀態", key: "animal_status" },
+  { field: "是否絕育", key: "animal_sterilization" },
+  { field: "是否施打狂犬病疫苗", key: "animal_bacterin" },
+  { field: "流水編號", key: "animal_id" },
+  { field: "區域編號", key: "animal_subid" },
+  { field: "所屬收容所名稱", key: "shelter_name" },
+  { field: "地址", key: "shelter_address" },
+  { field: "聯絡電話", key: "shelter_tel" },
+  { field: "尋獲地", key: "animal_foundplace" },
+  { field: "實際所在地", key: "animal_place" },
+  { field: "開放認養時間(起)", key: "animal_opendate" },
+  { field: "開放認養時間(迄)", key: "animal_closeddate" },
+  { field: "資料異動時間", key: "animal_update" },
+  { field: "資料建立時間", key: "animal_createtime" },
+  { field: "所屬縣市代碼", key: "animal_area_pkid" },
+  { field: "所屬收容所代碼", key: "animal_shelter_pkid" },
+  { field: "網頁標題", key: "animal_title" },
+  { field: "資料備註", key: "animal_remark" },
+  { field: "其他說明", key: "animal_caption" },
+  { field: "圖片名稱(原始名稱)", key: "album_name" },
+  { field: "異動時間", key: "cDate" },
+];
 
 interface Props {
   dispatch: Function;
@@ -55,8 +80,8 @@ class _DetailScreen extends React.Component<PageProps, State> {
     var rows = [];
     if (this.animal != null) {
       rows = [];
-      for (var i = 0; i < keys.length; i++) {
-        rows.push(<IonItem key={i} className='textFont'>{dispFields[i] + "：" + (this.animal as any)[keys[i]]}</IonItem>);
+      for (var i = 0; i < displayItems.length; i++) {
+        rows.push(<IonItem key={i} className='textFont'>{displayItems[i].field + "：" + (this.animal as any)[displayItems[i].key]}</IonItem>);
       }
     }
 

@@ -1,0 +1,8 @@
+.ionSelect {
+    border: 2px solid var(--ion-color-primary);
+    width: 20%;
+}
+
+.ionInput {
+    border: 2px solid var(--ion-color-primary);
+}

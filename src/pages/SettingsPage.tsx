@@ -81,7 +81,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                 if (!hasUpdate) {
                   this.setState({ showToast: true, toastMessage: 'App 已是最新版' });
                 }*/
-              }}>PWA 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel="noreferrer">{PackageInfos.pwaVersion}</a></IonLabel>
+              }}>App 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel="noreferrer">{PackageInfos.pwaVersion}</a></IonLabel>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={e => {
                 this.props.dispatch({
                   type: "TMP_SET_KEY_VAL",
