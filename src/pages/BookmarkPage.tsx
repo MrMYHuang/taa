@@ -62,7 +62,7 @@ class _BookmarkPage extends React.Component<PageProps, State> {
   delBookmarkHandler(uuid: number) {
     this.props.dispatch({
       type: "DEL_BOOKMARK",
-      title: uuid,
+      uuid: uuid,
     });
 
     if (!this.hasBookmark) {

@@ -98,6 +98,8 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* 2.1.3:
+  * 修正無法刪除書籤的 bug.
 * 2.1.2:
   * 修正錯字。
 * 2.1.1:

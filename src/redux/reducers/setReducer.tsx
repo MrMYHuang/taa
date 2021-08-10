@@ -11,7 +11,7 @@ export default function reducer(state = new Settings(), action: any) {
       break;
     case "DEL_BOOKMARK": {
       let bookmarksTemp = newSettings.bookmarks;
-      const idxToDel = bookmarksTemp.findIndex((b) => { return b === action });
+      const idxToDel = bookmarksTemp.findIndex((b) => { return b === action.uuid });
       if (idxToDel !== -1) {
         bookmarksTemp.splice(idxToDel, 1);
       }
