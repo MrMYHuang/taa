@@ -36,6 +36,8 @@ const filters: Filter[] = [
   { field: "狀態", key: "animal_status" },
   { field: "開放認養時間(起)", key: "animal_opendate" },
   { field: "開放認養時間(迄)", key: "animal_closeddate" },
+  { field: "資料異動時間", key: "animal_update" },
+  { field: "資料建立時間", key: "animal_createtime" },
 ];
 
 class FilterSel {
