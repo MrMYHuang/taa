@@ -3,6 +3,8 @@ import fs from 'fs';
 import { isPlatform, IonLabel } from '@ionic/react';
 import { DownloaderHelper, Stats } from 'node-downloader-helper';
 import { Settings } from './models/Settings';
+
+const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
 const dataUrl = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL';
 const pwaUrl = process.env.PUBLIC_URL || '';
 
@@ -165,6 +167,7 @@ const Globals = {
   pwaUrl,
   axiosInstance,
   dataUrl,
+  bugReportApiUrl,
   database,
   downloadData,
   getFileFromIndexedDB,
