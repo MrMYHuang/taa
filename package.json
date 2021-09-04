@@ -31,6 +31,7 @@
     "build-electron-store": "tsc -b tsconfigElectron.json && mv buildElectron/mainStore.js buildElectron/main.js",
     "start-electron": "npm run build-electron && electron .",
     "dist-snap": "npm run build-electron-store && rm -f dist/*.snap && electron-builder -l snap -c electronBuilderConfigs/snap.json -c.extraMetadata.name=twaa",
+    "dist-snap-arm64": "export SNAPCRAFT_BUILD_ENVIRONMENT=lxd && npm run build-electron-store && rm -f dist/*.snap && electron-builder -l snap --arm64 -c electronBuilderConfigs/snap.json -c.extraMetadata.name=twaa",
     "publish-snap": "snapcraft upload --release=stable dist/*.snap",
     "icons-mas": "cd buildElectron && iconutil -c icns icon.iconset",
     "dist-mas": "npm run build-electron-store && electron-builder -m mas --universal -c electronBuilderConfigs/mas.json",
