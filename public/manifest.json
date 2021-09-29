@@ -18,7 +18,7 @@
   "start_url": "/taa/",
   "url_handlers": [
     {
-      "origin": "https://myhpwa.github.io/taa/"
+      "origin": "https://myhpwa.github.io"
     }
   ],
   "display": "standalone",
