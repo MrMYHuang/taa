@@ -16,6 +16,11 @@
   ],
   "scope": "/taa/",
   "start_url": "/taa/",
+  "url_handlers": [
+    {
+      "origin": "https://myhpwa.github.io/taa/"
+    }
+  ],
   "display": "standalone",
   "shortcuts": [
     {
