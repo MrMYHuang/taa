@@ -98,6 +98,9 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.3.4:
+  * [修正] 網址分享在新電腦開啟異常。
+
 * PWA 2.3.3:
   * [修正] package.json homepage 若不為根目錄，全新使用 app link 運作異常問題。
 

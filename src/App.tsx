@@ -213,12 +213,12 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
     try {
       data = await Globals.getFileFromIndexedDB(Globals.animalsKey);
     } catch (err) {
-      this.setState({ downloadModal: { item: item, show: true, progress: 0 } });
+      //this.setState({ downloadModal: { item: item, show: true, progress: 0 } });
       const buffer = await Globals.downloadData(Globals.dataUrl, (progress: number) => {
-        this.setState({ downloadModal: { item: item, show: true, progress: progress } });
+        //this.setState({ downloadModal: { item: item, show: true, progress: progress } });
       });
       data = JSON.parse(buffer.toString());
-      this.setState({ downloadModal: { item: item, show: false, progress: 100 } });
+      //this.setState({ downloadModal: { item: item, show: false, progress: 100 } });
       Globals.saveFileToIndexedDB(Globals.animalsKey, data);
     }
     store.dispatch({
