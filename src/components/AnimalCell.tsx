@@ -24,40 +24,6 @@ var dispFields = ["性別", "年紀", "開放認養時間(起)", "所屬收容�
 var keys = ["animal_sex", "animal_age", "animal_opendate", "shelter_name", "cDate"]
 
 class _AnimalCell extends React.Component<PageProps, State> {
-  async modifyFavorites(addDel: number, animalId: number) {
-    let newFavorites: number[] = [];
-    let oldFavorites = this.props.settings.bookmarks;
-
-    let oldId;
-    // Init add
-    if (oldFavorites === undefined) {
-      newFavorites = [animalId]
-    }
-    else {
-      oldId = oldFavorites.indexOf(animalId)
-      // Add
-      if (addDel === 0) {
-        // Check duplicate.
-        if (oldId !== -1)
-          return
-
-        newFavorites = [animalId]
-        newFavorites = newFavorites.concat(oldFavorites)
-      }
-      // Del
-      else if (addDel === 1) {
-        oldFavorites.splice(oldId, 1)
-        newFavorites = oldFavorites
-      }
-    }
-
-    await this.props.dispatch({
-      type: "SET_KEY_VAL",
-      key: "bookmarks",
-      val: newFavorites
-    })
-  }
-
   render() {
     var rows = [];
     for (var i = 0; i < keys.length; i++) {

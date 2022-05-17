@@ -65,10 +65,12 @@ class _BookmarkPage extends React.Component<PageProps, State> {
       uuid: uuid,
     });
 
-    if (!this.hasBookmark) {
-      this.setState({ showToast: true, toastMessage: '無書籤！請將任認養動物加至書籤。' });
-      this.props.history.push(`${Globals.pwaUrl}/animals`);
-    }
+    setImmediate(() => {
+      if (!this.hasBookmark) {
+        this.setState({ showToast: true, toastMessage: '無書籤！請將任認養動物加至書籤。' });
+        this.props.history.push(`${Globals.pwaUrl}/animals`);
+      }
+    });
   }
 
   reorderBookmarks(event: CustomEvent<ItemReorderEventDetail>) {

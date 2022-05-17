@@ -238,10 +238,6 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                           handler: async (value) => {
                             await Globals.clearAppData();
                             this.props.dispatch({ type: 'DEFAULT_SETTINGS' });
-                            while (document.body.classList.length > 0) {
-                              document.body.classList.remove(document.body.classList.item(0)!);
-                            }
-                            document.body.classList.toggle(`theme${this.props.theme}`, true);
                             this.setState({ showClearAlert: false, showToast: true, toastMessage: "清除成功!" });
                           },
                         }
@@ -311,7 +307,9 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                       key: 'uiFontSize',
                       val: +e.detail.value,
                     });
-                    Globals.updateCssVars(this.props.settings);
+                    setImmediate(() => {
+                      Globals.updateCssVars(this.props.settings);
+                    });
                   }} />
                 </div>
               </div>
@@ -327,7 +325,9 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                     key: 'textFontSize',
                     val: +e.detail.value,
                   });
-                  Globals.updateCssVars(this.props.settings);
+                  setImmediate(() => {
+                    Globals.updateCssVars(this.props.settings);
+                  });
                 }} />
               </div>
             </IonItem>
