@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>io.github.myhpwa.taa</id>
   <name>Taiwan Animal Adoption</name>
-  <summary>[EN] Randomly displaying animals needing adoption of Taiwan. [中文] 隨機顯示台灣待認養動物資訊。</summary>
+  <summary>Randomly displaying animals needing adoption of Taiwan.</summary>
   <metadata_license>MIT</metadata_license>
   <project_license>MIT</project_license>
   <description>
