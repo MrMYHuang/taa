@@ -7,7 +7,7 @@ module.exports = customizeCra.override(
 
   // add an alias for "ag-grid-react" imports
   customizeCra.addWebpackAlias({
-    ["fs"]: 'memfs'
+    ["fs"]: 'memfs-myh'
   }),
 
   customizeCra.addWebpackPlugin(new NodePolyfillPlugin()),
