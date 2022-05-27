@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Taiwan Animal Adoption
+GenericName=Taiwan Animal Adoption
+Exec=twaa/twaa --no-sandbox
+Icon=${SNAP}/meta/gui/icon.png
+Type=Application
+Terminal=false
+Categories=None;
+StartupWMClass=twaa

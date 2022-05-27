@@ -1,15 +1,10 @@
 {
   "extends": "electronBuilderConfigs/common.json",
-  "extraMetadata": {
-    "name": "twaa"
-  },
   "extraResources": [
     {
       "from": "electronBuilderConfigs",
       "to": ".",
-      "filter": [
-        "IsSnap.txt"
-      ]
+      "filter": ["IsAppImage.txt"]
     }
   ]
 }

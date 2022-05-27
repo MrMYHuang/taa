@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast, IonLoading, IonLabel } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { RouteComponentProps } from 'react-router-dom';
@@ -65,12 +65,12 @@ class _BookmarkPage extends React.Component<PageProps, State> {
       uuid: uuid,
     });
 
-    setImmediate(() => {
+    setTimeout(() => {
       if (!this.hasBookmark) {
         this.setState({ showToast: true, toastMessage: '無書籤！請將任認養動物加至書籤。' });
         this.props.history.push(`${Globals.pwaUrl}/animals`);
       }
-    });
+    }, 0);
   }
 
   reorderBookmarks(event: CustomEvent<ItemReorderEventDetail>) {
@@ -83,7 +83,7 @@ class _BookmarkPage extends React.Component<PageProps, State> {
 
   getBookmarkRows() {
     let bookmarks = this.props.settings.bookmarks;
-    let rows = Array<object>();
+    let rows = Array<ReactNode>();
     bookmarks.forEach((animalId, i) => {
       let animal = this.props.tmpSettings.animals.find((a) => a.animal_id === animalId);
       rows.push(
@@ -171,9 +171,9 @@ class _BookmarkPage extends React.Component<PageProps, State> {
 
 const mapStateToProps = (state: any /*, ownProps*/) => {
   return {
-    bookmarks: state.settings.bookmarks,
-    settings: state.settings,
-    tmpSettings: state.tmpSettings,
+    bookmarks: { ...state.settings.bookmarks },
+    settings: { ...state.settings },
+    tmpSettings: { ...state.tmpSettings },
   }
 };
 

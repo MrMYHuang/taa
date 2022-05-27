@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.myhpwa.taa</id>
+  <name>Taiwan Animal Adoption</name>
+  <summary>[EN] Randomly displaying animals needing adoption of Taiwan. [中文] 隨機顯示台灣待認養動物資訊。</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>
+      Taiwan Animal Adoption (TAA) app 隨機顯示台灣的待認領養動物，點擊項目可開啟詳細資料。
+    </p>
+  </description>
+  <url type="homepage">https://github.com/MrMYHuang/taa</url>
+  <launchable type="desktop-id">io.github.myhpwa.taa.desktop</launchable>
+  <developer_name>Meng-Yuan Huang</developer_name>
+  <screenshots>
+    <screenshot type="default">
+    </screenshot>
+  </screenshots>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="2.2.0" date="2022-05-27">
+      <description>
+        <ul>
+          <li>更新至 Electron 19.0.1.</li>
+        </ul>
+      </description>
+    </release>
+  </releases> 
+</component>

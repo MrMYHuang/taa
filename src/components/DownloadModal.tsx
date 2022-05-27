@@ -27,9 +27,8 @@ class _DownloadModal extends React.Component<PageProps, State> {
     return (
       <IonModal
         isOpen={this.props.showModal}
-        cssClass='uiFont'
         backdropDismiss={false}
-        swipeToClose={false}
+        canDismiss={false}
       >
         <IonContent>
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center' }}>

@@ -1,9 +1,19 @@
-export class Settings {
-    version: number = 1;
-    hasAppLog: boolean = true;
-    theme: number = 3;
-    uiFontSize: number = 24;
-    textFontSize: number = 24;
-    dbUpdateDate: string = '';
-    bookmarks: number[] = [];
+export interface Settings {
+    version: number;
+    hasAppLog: boolean;
+    theme: number;
+    uiFontSize: number;
+    textFontSize: number;
+    dbUpdateDate: string;
+    bookmarks: number[];
 }
+
+export const defaultSettings = {
+    version: 1,
+    hasAppLog: true,
+    theme: 3,
+    uiFontSize: 18,
+    textFontSize: 18,
+    dbUpdateDate: '',
+    bookmarks: [],
+} as Settings;

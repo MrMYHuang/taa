@@ -307,9 +307,9 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                       key: 'uiFontSize',
                       val: +e.detail.value,
                     });
-                    setImmediate(() => {
+                    setTimeout(() => {
                       Globals.updateCssVars(this.props.settings);
-                    });
+                    }, 0);
                   }} />
                 </div>
               </div>
@@ -325,9 +325,9 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                     key: 'textFontSize',
                     val: +e.detail.value,
                   });
-                  setImmediate(() => {
+                  setTimeout(() => {
                     Globals.updateCssVars(this.props.settings);
-                  });
+                  }, 0);
                 }} />
               </div>
             </IonItem>
@@ -358,7 +358,8 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
 
 const mapStateToProps = (state: any /*, ownProps*/) => {
   return {
-    settings: state.settings,
+    tmpSettings: { ...state.tmpSettings },
+    settings: { ...state.settings },
     hasAppLog: state.settings.hasAppLog,
     theme: state.settings.theme,
     uiFontSize: state.settings.uiFontSize,

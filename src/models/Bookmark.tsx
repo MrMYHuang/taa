@@ -1,9 +1,9 @@
-export class Bookmark {
-    title: string = '';
-    url: string = '';
-
-    constructor(obj: Bookmark) {
-        this.title = obj.title;
-        this.url = obj.url;
-    }
+export interface Bookmark {
+    title: string;
+    url: string;
 }
+
+export const defaultBookmark = {
+    title: '',
+    url: '',
+} as Bookmark;

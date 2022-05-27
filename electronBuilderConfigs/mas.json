@@ -1,23 +1,16 @@
 {
-  "extends": null,
-  "appId": "io.github.myhpwa.taa",
-  "files": [
-    "buildElectron/**/*",
-    "package.json"
-  ],
-  "icon": "buildElectron/icon.icns",
+  "extends": "electronBuilderConfigs/common.json",
   "mac": {
-    "type": "distribution",
-    "identity": null
+      "type": "distribution",
+      "identity": null
   },
   "mas": {
-    "type": "distribution",
-    "identity": "Meng-Yuan Huang",
-    "category": "public.app-category.education",
-    "minimumSystemVersion": "10.10",
-    "hardenedRuntime": false,
-    "entitlements": "buildElectron/entitlements.mas.plist",
-    "entitlementsInherit": "buildElectron/entitlements.mas.inherit.plist",
+      "type": "distribution",
+      "identity": "Meng-Yuan Huang",
+      "artifactName": "${name}_${version}_mas.${ext}",
+      "hardenedRuntime": false,
+      "entitlements": "buildElectron/entitlements.mas.plist",
+      "entitlementsInherit": "buildElectron/entitlements.mas.inherit.plist",
     "provisioningProfile": "taa.provisionprofile"
   }
 }

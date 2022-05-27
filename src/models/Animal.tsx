@@ -1,29 +1,59 @@
-export class Animal {
-    animal_id = 180488;
-    animal_subid = "CAAAG1091016001";
-    animal_area_pkid = 6;
-    animal_shelter_pkid = 61;
-    animal_place = "桃園市動物保護教育園區";
-    animal_kind = "狗";
-    animal_sex = "F";
-    animal_bodytype = "MEDIUM";
-    animal_colour = "黑白色";
-    animal_age = "";
-    animal_sterilization = "F";
-    animal_bacterin = "F";
-    animal_foundplace = "中豐路";
-    animal_title = "";
-    animal_status = "OPEN";
-    animal_remark = "";
-    animal_caption = "";
-    animal_opendate = "";
-    animal_closeddate = "2999-12-31";
-    animal_update = "2021/08/01";
-    animal_createtime = "2020/10/16";
-    shelter_name = "桃園市動物保護教育園區";
-    album_file = "https://asms.coa.gov.tw/amlapp/upload/pic/b9a90ab6-3ed5-4c4b-9d8d-98b0b3a6b3e1_org.JPG";
-    album_update = "";
-    cDate = "2021/08/01";
-    shelter_address = "桃園市新屋區永興里3鄰藻礁路1668號";
-    shelter_tel = "03-4861760";
+export interface Animal {
+    animal_id: number;
+    animal_subid: string;
+    animal_area_pkid: number;
+    animal_shelter_pkid: number;
+    animal_place: string;
+    animal_kind: string;
+    animal_sex: string;
+    animal_bodytype: string;
+    animal_colour: string;
+    animal_age: string;
+    animal_sterilization: string;
+    animal_bacterin: string;
+    animal_foundplace: string;
+    animal_title: string;
+    animal_status: string;
+    animal_remark: string;
+    animal_caption: string;
+    animal_opendate: string;
+    animal_closeddate: string;
+    animal_update: string;
+    animal_createtime: string;
+    shelter_name: string;
+    album_file: string;
+    album_update: string;
+    cDate: string;
+    shelter_address: string;
+    shelter_tel: string;
 }
+
+export const defaultAnimal = {
+    animal_id: 180488,
+    animal_subid: "CAAAG1091016001",
+    animal_area_pkid: 6,
+    animal_shelter_pkid: 61,
+    animal_place: "桃園市動物保護教育園區",
+    animal_kind: "狗",
+    animal_sex: "F",
+    animal_bodytype: "MEDIUM",
+    animal_colour: "黑白色",
+    animal_age: "",
+    animal_sterilization: "F",
+    animal_bacterin: "F",
+    animal_foundplace: "中豐路",
+    animal_title: "",
+    animal_status: "OPEN",
+    animal_remark: "",
+    animal_caption: "",
+    animal_opendate: "",
+    animal_closeddate: "2999-12-31",
+    animal_update: "2021/08/01",
+    animal_createtime: "2020/10/16",
+    shelter_name: "桃園市動物保護教育園區",
+    album_file: "https://asms.coa.gov.tw/amlapp/upload/pic/b9a90ab6-3ed5-4c4b-9d8d-98b0b3a6b3e1_org.JPG",
+    album_update: "",
+    cDate: "2021/08/01",
+    shelter_address: "桃園市新屋區永興里3鄰藻礁路1668號",
+    shelter_tel: "03-4861760",
+} as Animal;

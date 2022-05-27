@@ -1,7 +1,7 @@
-import { TmpSettings } from "../../models/TmpSettings";
+import { defaultTmpSettings } from "../../models/TmpSettings";
 
 // Used to store temp settings in RAM. They will not be saved to file.
-export default function reducer(state = new TmpSettings(), action: any) {
+export default function reducer(state = {...defaultTmpSettings}, action: any) {
   var newState = { ...state };
   var key = action.key;
   var val = action.val;

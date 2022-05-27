@@ -1,0 +1,45 @@
+name: twaa
+base: core20
+confinement: strict
+grade: stable
+adopt-info: twaa
+
+apps:
+  twaa:
+    command: twaa/twaa --no-sandbox
+    desktop: twaa/io.github.myhpwa.taa.desktop
+    extensions: [gnome-3-38]
+    plugs:
+    - desktop
+    - desktop-legacy
+    - wayland
+    - browser-support
+    - network
+    - network-bind
+    environment:
+      # Correct the TMPDIR path for Chromium Framework/Electron to ensure
+      # libappindicator has readable resources.
+      TMPDIR: $XDG_RUNTIME_DIR
+
+parts:
+  twaa:
+    plugin: nil
+    source: .
+    parse-info: [buildElectron/io.github.myhpwa.taa.metainfo.xml]
+    override-build: |
+        mkdir -p nvm
+        wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | NVM_DIR=`pwd`/nvm bash
+        . nvm/nvm.sh
+        nvm install 16
+        npm i
+        npm run build-electron-store
+        npm x -- electron-builder -l dir -c electronBuilderConfigs/snap.json
+        electronPackagePath=$(ls -d ./dist/linux*unpacked)
+        cp snap/local/io.github.myhpwa.taa.desktop ${electronPackagePath}
+        cp -rv ${electronPackagePath} $SNAPCRAFT_PART_INSTALL/twaa
+    build-packages:
+    - unzip
+    - wget
+    stage-packages:
+    - libnss3
+    - libnspr4

@@ -149,8 +149,8 @@ class _DetailScreen extends React.Component<PageProps, State> {
 
 const mapStateToProps = (state: any /*, ownProps*/) => {
   return {
-    tmpSettings: state.tmpSettings,
-    settings: state.settings
+    tmpSettings: { ...state.tmpSettings },
+    settings: { ...state.settings }
   }
 };
 
