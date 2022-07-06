@@ -30,8 +30,8 @@ class _ShareTextModal extends React.Component<PageProps, State> {
     }
   }
 
-  updateQrCode() {
-    const appSettingsExport = Object.keys(Globals.appSettings).filter((key, i) => this.state.isAppSettingsExport[i]).map((key, i) => { return { key: key, val: this.props.settings[key] }; });
+  updateQrCode(isAppSettingsExport: boolean[]) {
+    const appSettingsExport = Object.keys(Globals.appSettings).filter((key, i) => isAppSettingsExport[i]).map((key, i) => { return { key: key, val: this.props.settings[key] }; });
     let appSettingsString: string | null = appSettingsExport.map(keyVal => `${keyVal.key}=${+keyVal.val}`).join(',');
     appSettingsString = appSettingsString !== '' ? `settings=${appSettingsString}` : null;
     let appUrl = this.props.text;
@@ -52,29 +52,28 @@ class _ShareTextModal extends React.Component<PageProps, State> {
         isOpen={this.props.showModal}
         canDismiss={true}
         //presentingElement={router || undefined}
-        onWillPresent={() => {
+        onDidPresent={() => {
           let isAppSettingsExport: Array<boolean> = [];
           for (let i = 0; i < this.state.isAppSettingsExport.length; i++) {
             isAppSettingsExport.push(false);
           }
-          this.setState({ isAppSettingsExport: isAppSettingsExport }, () => {
-            this.updateQrCode();
-          });
+          this.updateQrCode(isAppSettingsExport);
+          this.setState({ isAppSettingsExport: isAppSettingsExport });
         }}
         onDidDismiss={() => this.props.finish()}>
         <IonContent>
           <div style={{ display: 'flex', flexDirection: 'column', height: '100%', alignItems: 'center' }}>
             <div>
-              <IonLabel className='uiFont'>此頁app連結已複製至剪貼簿！</IonLabel>
+              <IonLabel className='uiFont'>此頁 app 連結已複製至剪貼簿！</IonLabel>
             </div>
             <div>
-              <IonLabel className='uiFont'>也可以使用QR Code分享:</IonLabel>
+              <IonLabel className='uiFont'>也可以使用 QR Code 分享:</IonLabel>
             </div>
             <div style={{ flexGrow: 1, flexShrink: 0, display: 'flex', alignItems: 'center', margin: 10 }}>
               <canvas id='qrcCanvas' width='500' height='500' style={{ margin: '0px auto' }} />
             </div>
             <div>
-              <IonLabel className='uiFont'>包括app設定:</IonLabel>
+              <IonLabel className='uiFont'>包括 app 設定:</IonLabel>
               <IonList>
                 {
                   Object.keys(Globals.appSettings).map((key, i) =>
@@ -83,9 +82,8 @@ class _ShareTextModal extends React.Component<PageProps, State> {
                       <IonToggle slot='end' onIonChange={e => {
                         const isAppSettingsExport = this.state.isAppSettingsExport;
                         isAppSettingsExport[i] = e.detail.checked;
-                        this.setState({ isAppSettingsExport: isAppSettingsExport }, () => {
-                          this.updateQrCode();
-                        });
+                        this.updateQrCode(isAppSettingsExport);
+                        this.setState({ isAppSettingsExport: isAppSettingsExport });
                       }} />
                     </IonItem>
                   )

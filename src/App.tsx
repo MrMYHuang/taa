@@ -118,7 +118,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
     electronBackendApi?.receive("fromMain", (data: any) => {
       switch (data.event) {
         case 'version':
-          store.dispatch({
+          this.props.dispatch({
             type: "TMP_SET_KEY_VAL",
             key: 'mainVersion',
             val: data.version,
@@ -202,7 +202,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
   }
 
   async loadData() {
-    store.dispatch({
+    this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'isLoading',
       val: true,
@@ -220,12 +220,12 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       //this.setState({ downloadModal: { item: item, show: false, progress: 100 } });
       Globals.saveFileToIndexedDB(Globals.animalsKey, data);
     }
-    store.dispatch({
+    this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'animals',
       val: data,
     });
-    store.dispatch({
+    this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'isLoading',
       val: false,
@@ -346,7 +346,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
             text: this.props.shareTextModal?.text,
             showModal: this.props.shareTextModal?.show || false,
             finish: () => {
-              store.dispatch({
+              this.props.dispatch({
                 type: "TMP_SET_KEY_VAL",
                 key: 'shareTextModal',
                 val: { show: false },

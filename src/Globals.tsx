@@ -153,10 +153,28 @@ function disableAppLog() {
 
 function copyToClipboard(text: string) {
   try {
-    navigator.clipboard && navigator.clipboard.writeText(text);
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: 'clipboard-read' } as any).then(() => {
+        navigator.clipboard.writeText(text);
+      });
+    } else {
+      navigator.clipboard && navigator.clipboard.writeText(text);
+    }
   } catch (error) {
     console.error(error);
   }
+}
+
+function shareByLink(dispatch: Function, url: string = window.location.href) {
+  copyToClipboard(url);
+  dispatch({
+    type: 'TMP_SET_KEY_VAL',
+    key: 'shareTextModal',
+    val: {
+      show: true,
+      text: decodeURIComponent(url),
+    },
+  });
 }
 
 function isMacCatalyst() {
@@ -219,6 +237,7 @@ const Globals = {
   },
   clearAppData,
   copyToClipboard,
+  shareByLink,
 };
 
 export default Globals;

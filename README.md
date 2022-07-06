@@ -98,6 +98,9 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.4.1:
+  * [修正] iOS 上，分享 app 連結未複製到剪貼簿的問題。
+
 * PWA 2.4.0:
   * [優化] 升級套件。
 

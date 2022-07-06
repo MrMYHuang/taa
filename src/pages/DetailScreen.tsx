@@ -8,6 +8,7 @@ import { TmpSettings } from '../models/TmpSettings';
 
 import './Pages.css';
 import { arrowBack, bookmark, shareSocial } from 'ionicons/icons';
+import Globals from '../Globals';
 
 var displayItems = [
   { field: "類型", key: "animal_kind" },
@@ -109,14 +110,7 @@ class _DetailScreen extends React.Component<PageProps, State> {
               </IonButton>
 
               <IonButton fill="clear" slot='end' onClick={e => {
-                this.props.dispatch({
-                  type: "TMP_SET_KEY_VAL",
-                  key: 'shareTextModal',
-                  val: {
-                    show: true,
-                    text: decodeURIComponent(window.location.href),
-                  },
-                });
+                Globals.shareByLink(this.props.dispatch, decodeURIComponent(window.location.href));
               }}>
                 <IonIcon icon={shareSocial} slot='icon-only' />
               </IonButton>

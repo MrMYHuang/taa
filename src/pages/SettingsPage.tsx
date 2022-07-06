@@ -86,14 +86,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                 }*/
               }}>App 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel="noreferrer">{PackageInfos.pwaVersion}</a></IonLabel>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={e => {
-                this.props.dispatch({
-                  type: "TMP_SET_KEY_VAL",
-                  key: 'shareTextModal',
-                  val: {
-                    show: true,
-                    text: window.location.origin,
-                  },
-                });
+                Globals.shareByLink(this.props.dispatch, window.location.origin);
               }}>分享</IonButton>
             </IonItem>
             <IonItem hidden={!this.props.mainVersion || Globals.isMac()}>
