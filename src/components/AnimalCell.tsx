@@ -34,7 +34,7 @@ class _AnimalCell extends React.Component<PageProps, State> {
 
     return (<>
       <IonThumbnail slot='start' className='animalCellImg'>
-        <IonImg src={img} alt='' />
+        <IonImg src={img} alt='無圖片' />
       </IonThumbnail>
       <IonLabel className='ion-text-wrap'>
         {rows}

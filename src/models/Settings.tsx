@@ -5,6 +5,7 @@ export interface Settings {
     uiFontSize: number;
     textFontSize: number;
     dbUpdateDate: string;
+    alertUpdateOfflineData: boolean;
     bookmarks: number[];
 }
 
@@ -15,5 +16,6 @@ export const defaultSettings = {
     uiFontSize: 18,
     textFontSize: 18,
     dbUpdateDate: '',
+    alertUpdateOfflineData: true,
     bookmarks: [],
 } as Settings;

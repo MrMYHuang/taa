@@ -41,7 +41,7 @@ import ShareTextModal from './components/ShareTextModal';
 import BookmarkPage from './pages/BookmarkPage';
 import ListScreen from './pages/ListScreen';
 import DetailScreen from './pages/DetailScreen';
-import DownloadModal from './components/DownloadModal';
+import { Settings } from './models/Settings';
 
 const electronBackendApi: any = (window as any).electronBackendApi;
 
@@ -67,6 +67,7 @@ setupIonicReact({
 });
 
 export var serviceWorkCallbacks = {
+  onLoad: function (registration: ServiceWorkerRegistration) { },
   onSuccess: function (registration: ServiceWorkerRegistration) { },
   onUpdate: function (registration: ServiceWorkerRegistration) { },
 };
@@ -74,7 +75,7 @@ export var serviceWorkCallbacks = {
 interface Props {
   dispatch: Function;
   shareTextModal: any;
-  settings: any;
+  settings: Settings;
 }
 
 interface PageProps extends RouteComponentProps<{
@@ -92,7 +93,6 @@ interface State {
   toastMessage: string;
   showUpdateAlert: boolean;
   showRestoreAppSettingsToast: boolean;
-  downloadModal: any;
 }
 
 class _App extends React.Component<PageProps> {
@@ -157,7 +157,12 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       showRestoreAppSettingsToast: (queryParams.settings != null && this.originalAppSettingsStr != null) || false,
       showToast: false,
       toastMessage: '',
-      downloadModal: { progress: 0, show: false }
+    };
+
+    serviceWorkCallbacks.onLoad = (registration: ServiceWorkerRegistration) => {
+      if (registration.installing || registration.waiting) {
+        this.setState({ showUpdateAlert: true });
+      }
     };
 
     serviceWorkCallbacks.onUpdate = (registration: ServiceWorkerRegistration) => {
@@ -283,6 +288,16 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
     }
   }
 
+  componentDidMount() {
+    const now = new Date();
+    const dbUpdateDate = new Date(this.props.settings.dbUpdateDate);
+    const timeDiff = now.getTime() - dbUpdateDate.getTime();
+    if (this.props.settings.alertUpdateOfflineData &&
+      (timeDiff > 1000 * 60 * 60 * 24 * 30)) {
+      this.setState({ showToast: true, toastMessage: `離線資料已 30 天未更新，可至設定頁更新。` });
+    }
+  }
+
   render() {
     return (
       <IonApp>
@@ -312,11 +327,19 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
           cssClass='uiFont'
           isOpen={this.state.showUpdateAlert}
           backdropDismiss={false}
-          onDidPresent={(ev) => {
+          onDidPresent={async (ev) => {
             // Run SKIP_WAITING at onDidPresent event to avoid a race condition of
             // an old page fetching old JS chunks with a new service worker!
-            this.registrationNew?.installing?.postMessage({ type: 'SKIP_WAITING' });
-            this.registrationNew?.waiting?.postMessage({ type: 'SKIP_WAITING' });
+            // Which causes this alert fails to show.
+            try {
+              (await Globals.getServiceWorkerReg()).installing?.postMessage({ type: 'SKIP_WAITING' });
+              (await Globals.getServiceWorkerReg()).waiting?.postMessage({ type: 'SKIP_WAITING' });
+            } catch (error) {
+              console.error(error);
+            }
+
+            Globals.getServiceWorkerRegUpdated().installing?.postMessage({ type: 'SKIP_WAITING' });
+            Globals.getServiceWorkerRegUpdated().waiting?.postMessage({ type: 'SKIP_WAITING' });
           }}
           header={'App 已更新，請重啟!'}
           buttons={[
@@ -330,15 +353,6 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
               },
             }
           ]}
-        />
-
-        <DownloadModal
-          {...{
-            item: this.state.downloadModal.item,
-            progress: this.state.downloadModal.progress,
-            showModal: this.state.downloadModal.show,
-            ...this.props
-          }}
         />
 
         <ShareTextModal

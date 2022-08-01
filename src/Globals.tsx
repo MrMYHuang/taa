@@ -181,6 +181,40 @@ function isMacCatalyst() {
   return isPlatform('ios') && navigator.platform === 'MacIntel';
 }
 
+const checkServiceWorkerInterval = 20;
+let serviceWorkerLoaded = false;
+let _serviceWorkerReg: ServiceWorkerRegistration;
+async function getServiceWorkerReg() {
+  if (serviceWorkerLoaded) {
+    return _serviceWorkerReg;
+  }
+
+  return new Promise<ServiceWorkerRegistration>((ok, fail) => {
+    let waitTime = 0;
+    const waitLoading = setInterval(() => {
+      if (navigator.serviceWorker.controller != null) {
+        clearInterval(waitLoading);
+        ok(_serviceWorkerReg);
+      } else if (waitTime > 1e3 * 10) {
+        clearInterval(waitLoading);
+        fail('getServiceWorkerReg timeout!');
+      }
+      waitTime += checkServiceWorkerInterval;
+    }, checkServiceWorkerInterval);
+  });
+}
+function setServiceWorkerReg(serviceWorkerReg: ServiceWorkerRegistration) {
+  _serviceWorkerReg = serviceWorkerReg;
+}
+
+let _serviceWorkerRegUpdated: ServiceWorkerRegistration;
+function getServiceWorkerRegUpdated() {
+  return _serviceWorkerRegUpdated;
+}
+function setServiceWorkerRegUpdated(serviceWorkerRegUpdated: ServiceWorkerRegistration) {
+  _serviceWorkerRegUpdated = serviceWorkerRegUpdated;
+}
+
 const Globals = {
   pwaUrl,
   axiosInstance,
@@ -238,6 +272,10 @@ const Globals = {
   clearAppData,
   copyToClipboard,
   shareByLink,
+  setServiceWorkerReg,
+  getServiceWorkerReg,
+  setServiceWorkerRegUpdated,
+  getServiceWorkerRegUpdated,
 };
 
 export default Globals;

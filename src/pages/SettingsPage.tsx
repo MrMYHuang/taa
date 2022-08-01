@@ -258,6 +258,20 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
             </IonItem>
             <IonItem>
               <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
+              <IonIcon icon={refreshCircle} slot='start' />
+              <IonLabel className='ion-text-wrap uiFont'>啟用離線資料更新通知</IonLabel>
+              <IonToggle slot='end' checked={this.props.settings.alertUpdateOfflineData} onIonChange={e => {
+                const isChecked = e.detail.checked;
+
+                this.props.dispatch({
+                  type: "SET_KEY_VAL",
+                  key: 'alertUpdateOfflineData',
+                  val: isChecked
+                });
+              }} />
+            </IonItem>
+            <IonItem>
+              <div tabIndex={0}></div>{/* Workaround for macOS Safari 14 bug. */}
               <IonIcon icon={colorPalette} slot='start' />
               <IonLabel className='ion-text-wrap uiFont'>{Globals.appSettings['theme']}</IonLabel>
               <IonSelect slot='end'

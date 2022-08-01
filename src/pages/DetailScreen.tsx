@@ -121,7 +121,7 @@ class _DetailScreen extends React.Component<PageProps, State> {
               <IonLabel className='ion-text-wrap textFont'>此認養動物資料已不存在。</IonLabel>
               :
               <>
-                <IonImg src={this.animal?.album_file || ''} className='detailScreenImg' alt='' />
+                <IonImg src={this.animal?.album_file || ''} className='detailScreenImg' alt='無圖片' />
                 <IonList>
                   {rows}
                 </IonList>

@@ -98,6 +98,11 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.5.0:
+  * [新增] 離線資料更新通知設定。
+  * [優化] 動物資料缺圖檔，應顯示"無圖片"。
+  * [優化] Service Worker 更新。
+
 * PWA 2.4.1:
   * [修正] iOS 上，分享 app 連結未複製到剪貼簿的問題。
 
