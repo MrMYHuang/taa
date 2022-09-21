@@ -60,6 +60,12 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
     const data = JSON.parse(buffer.toString());
     Globals.saveFileToIndexedDB(Globals.animalsKey, data);
     this.setState({ dataDownloadRatio: 1, showUpdateDataDone: true });
+      
+    this.props.dispatch({
+      type: "SET_KEY_VAL",
+      key: 'dbUpdateDate',
+      val: new Date().toISOString(),
+    });
   }
 
   reportText = '';
@@ -245,6 +251,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={refreshCircle} slot='start' />
               <div style={{ width: '100%' }}>
                 <IonLabel className='ion-text-wrap uiFont'>更新離線認養動物資料</IonLabel>
+                <IonLabel className='ion-text-wrap uiFont'>上次更新：{new Date(this.props.settings.dbUpdateDate).toLocaleDateString()}</IonLabel>
                 <IonProgressBar value={this.state.dataDownloadRatio} />
               </div>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={async (e) => this.updateOfflineData()}>更新</IonButton>

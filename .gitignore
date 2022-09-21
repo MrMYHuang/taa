@@ -61,6 +61,6 @@ fastlane/screenshots
 *.appx
 windows/taa/Package.StoreAssociation.xml
 *.provisionprofile
-pwa
+taa-pwa
 win
 android

@@ -15,7 +15,7 @@ export const defaultSettings = {
     theme: 3,
     uiFontSize: 18,
     textFontSize: 18,
-    dbUpdateDate: '',
+    dbUpdateDate: new Date().toISOString(),
     alertUpdateOfflineData: true,
     bookmarks: [],
 } as Settings;
