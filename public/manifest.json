@@ -29,6 +29,6 @@
       "icons": [{ "src": "assets/icon/icon.png", "sizes": "1024x1024" }]
     }
   ],
-  "theme_color": "black",
-  "background_color": "black"
+  "theme_color": "#000000",
+  "background_color": "#000000"
 }
