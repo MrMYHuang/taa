@@ -193,3 +193,7 @@ https://myhpwa.github.io/taa
 1. 動物認領養資料集 ( https://data.gov.tw/dataset/85903 )
 
     此app使用《動物認領養》資料集。此開放資料依政府資料開放授權條款 (Open Government Data License) 進行公眾釋出，使用者於遵守本條款各項規定之前提下，得利用之。政府資料開放授權條款：https://data.gov.tw/license
+
+## Notices
+
+  1. Android Package ID: com.taa
