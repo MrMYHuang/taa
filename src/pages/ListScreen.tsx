@@ -44,7 +44,6 @@ class FilterSel {
   id: number = 0;
   key: string = 'animal_kind';
   search: string = '';
-
 }
 
 interface Props {
@@ -55,7 +54,7 @@ interface Props {
 
 interface State {
   animalsLoaded: Animal[];
-  filtersSel: FilterSel[]
+  filtersSel: FilterSel[];
   isScrollOn: boolean;
   showToast: boolean;
   toastMessage: string;
@@ -83,13 +82,12 @@ class _ListScreen extends React.Component<PageProps, State> {
 
   filterRegExp: RegExp[] = [];
 
-  page = 0;
   rows = 20;
-  async fetachDataPageByPage(fromPage0: boolean = false) {
+  loadMoreLock = false;
+  async fetachDataPageByPage(fromStart: boolean = false) {
     await new Promise<void>((ok, fail) => {
       let timer = setInterval(() => {
-        if (!this.props.tmpSettings.isLoading) {
-          // Initialization.
+        if (!this.props.tmpSettings.isLoading && this.props.settings.appInitialized) {
           if (this.animalsFiltered.length === 0 && this.filterRegExp.length === 0) {
             this.animalsFiltered = this.props.tmpSettings.animals;
           }
@@ -99,20 +97,22 @@ class _ListScreen extends React.Component<PageProps, State> {
       }, 50);
     });
 
-    if (fromPage0) {
-      this.page = 0;
+    if (this.loadMoreLock) {
+      return;
     }
+    this.loadMoreLock = true;
 
-    console.log(`Loading page ${this.page}`);
 
     const animalsLength = this.animalsFiltered.length;
 
     const animalsRandomlySelected = (new Array(this.rows).fill(0)).map(v => this.animalsFiltered[Math.floor(Math.random() * animalsLength)]).filter(a => a != null);
+    const animalsLoaded = fromStart ? animalsRandomlySelected : [...this.state.animalsLoaded, ...animalsRandomlySelected];
 
-    this.page += 1;
     this.setState({
-      animalsLoaded: fromPage0 ? animalsRandomlySelected : [...this.state.animalsLoaded, ...animalsRandomlySelected],
-      isScrollOn: this.state.animalsLoaded.length < animalsLength,
+      animalsLoaded: animalsLoaded,
+      isScrollOn: animalsLoaded.length < animalsLength,
+    }, () => {
+      this.loadMoreLock = false;
     });
 
     return true;

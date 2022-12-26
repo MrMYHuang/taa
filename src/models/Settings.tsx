@@ -1,5 +1,6 @@
 export interface Settings {
     version: number;
+    appInitialized: boolean;
     hasAppLog: boolean;
     theme: number;
     uiFontSize: number;
@@ -11,6 +12,7 @@ export interface Settings {
 
 export const defaultSettings = {
     version: 1,
+    appInitialized: false,
     hasAppLog: true,
     theme: 3,
     uiFontSize: 18,

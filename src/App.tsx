@@ -10,6 +10,7 @@ import {
   IonAlert,
   IonToast,
   setupIonicReact,
+  IonLoading,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { connect, Provider } from 'react-redux';
@@ -42,6 +43,8 @@ import BookmarkPage from './pages/BookmarkPage';
 import ListScreen from './pages/ListScreen';
 import DetailScreen from './pages/DetailScreen';
 import { Settings } from './models/Settings';
+import { TmpSettings } from './models/TmpSettings';
+import IndexedDbFuncs from './IndexedDbFuncs';
 
 const electronBackendApi: any = (window as any).electronBackendApi;
 
@@ -76,6 +79,7 @@ interface Props {
   dispatch: Function;
   shareTextModal: any;
   settings: Settings;
+  tmpSettings: TmpSettings;
 }
 
 interface PageProps extends RouteComponentProps<{
@@ -191,14 +195,17 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       });
     }
 
-    const dbOpenReq = indexedDB.open(Globals.database);
-    // Init store in indexedDB if necessary.
-    dbOpenReq.onupgradeneeded = function (event: IDBVersionChangeEvent) {
-      var db = (event.target as any).result;
-      db.createObjectStore('store');
-      console.log(`DB store created.`);
-    };
-    this.loadData();
+    IndexedDbFuncs.open().then(() => {
+      if (this.props.settings.appInitialized) {
+        this.loadData();
+      } else {
+        this.props.dispatch({
+          type: "TMP_SET_KEY_VAL",
+          key: 'isLoading',
+          val: false,
+        });
+      }
+    });
   }
 
   restoreAppSettings() {
@@ -215,7 +222,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
 
     let data: any;
     try {
-      data = await Globals.getFileFromIndexedDB(Globals.animalsKey);
+      data = await IndexedDbFuncs.getFile(Globals.animalsKey);
     } catch (err) {
       //this.setState({ downloadModal: { item: item, show: true, progress: 0 } });
       const buffer = await Globals.downloadData(Globals.dataUrl, (progress: number) => {
@@ -223,7 +230,7 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       });
       data = JSON.parse(buffer.toString());
       //this.setState({ downloadModal: { item: item, show: false, progress: 100 } });
-      Globals.saveFileToIndexedDB(Globals.animalsKey, data);
+      IndexedDbFuncs.saveFile(Globals.animalsKey, data);
     }
     this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
@@ -355,6 +362,34 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
           ]}
         />
 
+        <IonAlert
+          cssClass='uiFont'
+          backdropDismiss={false}
+          isOpen={!this.props.settings.appInitialized}
+          header='初次啟動'
+          message='須下載離線資料，請按確定以繼續'
+          buttons={[
+            {
+              text: '確定',
+              cssClass: 'primary uiFont',
+              handler: async (value) => {
+                await this.loadData();
+                this.props.dispatch({
+                  type: "SET_KEY_VAL",
+                  key: 'appInitialized',
+                  val: true,
+                });
+              },
+            },
+          ]}
+        />
+
+        <IonLoading
+          cssClass='uiFont'
+          isOpen={this.props.tmpSettings.isLoading}
+          message={'載入中...'}
+        />
+
         <ShareTextModal
           {...{
             text: this.props.shareTextModal?.text,
@@ -403,6 +438,7 @@ const mapStateToProps = (state: any /*, ownProps*/) => {
   return {
     shareTextModal: state.tmpSettings.shareTextModal,
     settings: state.settings,
+    tmpSettings: { ...state.tmpSettings },
   }
 };
 

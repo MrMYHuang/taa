@@ -7,6 +7,7 @@ import { helpCircle, text, colorPalette, shareSocial, bug, download, information
 import './SettingsPage.css';
 import PackageInfos from '../../package.json';
 import { Settings } from '../models/Settings';
+import IndexedDbFuncs from '../IndexedDbFuncs';
 
 interface StateProps {
   dataDownloadRatio: number;
@@ -58,7 +59,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
       this.setState({ dataDownloadRatio: (progress / 100) });
     });
     const data = JSON.parse(buffer.toString());
-    Globals.saveFileToIndexedDB(Globals.animalsKey, data);
+    IndexedDbFuncs.saveFile(Globals.animalsKey, data);
     this.setState({ dataDownloadRatio: 1, showUpdateDataDone: true });
       
     this.props.dispatch({
@@ -90,7 +91,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                 if (!hasUpdate) {
                   this.setState({ showToast: true, toastMessage: 'App 已是最新版' });
                 }*/
-              }}>App 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel="noreferrer">{PackageInfos.pwaVersion}</a></IonLabel>
+              }}>App 版本: <a href="https://github.com/MrMYHuang/taa#history" target="_blank" rel='noreferrer noopener'>{PackageInfos.pwaVersion}</a></IonLabel>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={e => {
                 Globals.shareByLink(this.props.dispatch, window.location.origin);
               }}>分享</IonButton>
@@ -350,7 +351,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <IonIcon icon={helpCircle} slot='start' />
               <div className='uiFont'>
                 <div>關於</div>
-                <div hidden={Globals.isMac()}><a href="https://github.com/MrMYHuang/taa" target="_blank" rel="noreferrer">操作說明與開放原始碼</a></div>
+                <div hidden={Globals.isMac()}><a href="https://github.com/MrMYHuang/taa" target="_blank" rel='noreferrer noopener'>操作說明與開放原始碼</a></div>
                 <div>作者: Meng-Yuan Huang</div>
                 <div><a href="mailto:myh@live.com" target="_blank" rel="noreferrer">myh@live.com</a></div>
               </div>

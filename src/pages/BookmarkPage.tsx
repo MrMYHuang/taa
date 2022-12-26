@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast, IonLoading, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonReorderGroup, IonReorder, IonItem, withIonLifeCycle, IonItemSliding, IonItemOptions, IonItemOption, IonIcon, IonButton, IonToast, IonLabel } from '@ionic/react';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { RouteComponentProps } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -31,8 +31,8 @@ const helpDoc = Globals.isStoreApps() ?
   <></>
   :
   <>
-    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#web-app" target="_blank" rel="noreferrer">程式安裝說明</a></div>
-    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#shortcuts" target="_blank" rel="noreferrer">程式捷徑</a></div>
+    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#web-app" target="_blank" rel='noreferrer noopener'>程式安裝說明</a></div>
+    <div style={{ fontSize: 'var(--ui-font-size)', textAlign: 'center' }}><a href="https://github.com/MrMYHuang/twdi#shortcuts" target="_blank" rel='noreferrer noopener'>程式捷徑</a></div>
   </>;
 
 class _BookmarkPage extends React.Component<PageProps, State> {
@@ -136,11 +136,7 @@ class _BookmarkPage extends React.Component<PageProps, State> {
         <IonContent>
           {
             this.props.tmpSettings.isLoading ?
-              <IonLoading
-                cssClass='uiFont'
-                isOpen={this.props.tmpSettings.isLoading}
-                message={'載入中...'}
-              />
+              <></>
               :
               this.hasBookmark ?
                 <>
