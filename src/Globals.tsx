@@ -1,7 +1,5 @@
 import axios from 'axios';
-import fs from 'fs';
 import { isPlatform, IonLabel } from '@ionic/react';
-import { DownloaderHelper, Stats } from 'node-downloader-helper';
 import { Settings } from './models/Settings';
 
 const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
@@ -11,34 +9,18 @@ const pwaUrl = process.env.PUBLIC_URL || '';
 const animalsKey = 'animals';
 
 const axiosInstance = axios.create({
-  timeout: 8000,
+  timeout: 16000,
 });
 
-async function downloadData(url: string, progressCallback: Function) {
-  return new Promise<Buffer>((ok, fail) => {
-    const dl = new DownloaderHelper(url, '.', {});
-    let progressUpdateEnable = true;
-    dl.on('progress', (stats: Stats) => {
-      if (progressUpdateEnable) {
-        // Reduce number of this calls by progressUpdateEnable.
-        // Too many of this calls could result in 'end' event callback is executed before 'progress' event callbacks!
-        progressCallback(stats.progress);
-        progressUpdateEnable = false;
-        setTimeout(() => {
-          progressUpdateEnable = true;
-        }, 100);
-      }
-    });
-    dl.on('end', (downloadInfo: any) => {
-      dl.removeAllListeners();
-      const data = fs.readFileSync(downloadInfo.filePath);
-      ok(data);
-    });
-    dl.start();
-  });
-}
-
 let log = '';
+
+async function downloadData() {
+  const res = await axiosInstance.get(dataUrl, {
+    responseType: 'json'
+  });
+
+  return res.data;
+}
 
 async function clearAppData() {
   localStorage.clear();

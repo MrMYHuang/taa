@@ -224,19 +224,23 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
     try {
       data = await IndexedDbFuncs.getFile(Globals.animalsKey);
     } catch (err) {
-      //this.setState({ downloadModal: { item: item, show: true, progress: 0 } });
-      const buffer = await Globals.downloadData(Globals.dataUrl, (progress: number) => {
-        //this.setState({ downloadModal: { item: item, show: true, progress: progress } });
-      });
-      data = JSON.parse(buffer.toString());
-      //this.setState({ downloadModal: { item: item, show: false, progress: 100 } });
-      IndexedDbFuncs.saveFile(Globals.animalsKey, data);
-    }
+      try {
+        data = await Globals.downloadData();
+        IndexedDbFuncs.saveFile(Globals.animalsKey, data);
+        this.props.dispatch({
+          type: "TMP_SET_KEY_VAL",
+          key: 'animals',
+          val: data,
+        });
+      } catch (err) {
+        this.setState({ showToast: true, toastMessage: `下載失敗：${err}` });
     this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'animals',
       val: data,
     });
+      }
+    }
     this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'isLoading',

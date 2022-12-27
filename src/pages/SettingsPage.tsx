@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonRange, IonIcon, IonLabel, IonToggle, IonButton, IonAlert, IonSelect, IonSelectOption, IonToast, withIonLifeCycle, IonProgressBar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonList, IonItem, IonRange, IonIcon, IonLabel, IonToggle, IonButton, IonAlert, IonSelect, IonSelectOption, IonToast, withIonLifeCycle } from '@ionic/react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import Globals from '../Globals';
@@ -10,7 +10,6 @@ import { Settings } from '../models/Settings';
 import IndexedDbFuncs from '../IndexedDbFuncs';
 
 interface StateProps {
-  dataDownloadRatio: number;
   showUpdateDataDone: boolean;
   showBugReportAlert: boolean;
   showClearAlert: boolean;
@@ -41,7 +40,6 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
     super(props);
 
     this.state = {
-      dataDownloadRatio: 0,
       showUpdateDataDone: false,
       showBugReportAlert: false,
       showClearAlert: false,
@@ -54,18 +52,31 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
   }
 
   async updateOfflineData() {
-    this.setState({ dataDownloadRatio: 0 });
-    const buffer = await Globals.downloadData(Globals.dataUrl, (progress: number) => {
-      this.setState({ dataDownloadRatio: (progress / 100) });
-    });
-    const data = JSON.parse(buffer.toString());
-    IndexedDbFuncs.saveFile(Globals.animalsKey, data);
-    this.setState({ dataDownloadRatio: 1, showUpdateDataDone: true });
-      
     this.props.dispatch({
-      type: "SET_KEY_VAL",
-      key: 'dbUpdateDate',
-      val: new Date().toISOString(),
+      type: "TMP_SET_KEY_VAL",
+      key: 'isLoading',
+      val: true,
+    });
+
+    try {
+      const data = await Globals.downloadData();;
+      IndexedDbFuncs.saveFile(Globals.animalsKey, data);
+      this.setState({ showUpdateDataDone: true });
+
+      this.props.dispatch({
+        type: "SET_KEY_VAL",
+        key: 'dbUpdateDate',
+        val: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error(error);
+      this.setState({showToast: true, toastMessage: `下載失敗：${error}`})
+    }
+
+    this.props.dispatch({
+      type: "TMP_SET_KEY_VAL",
+      key: 'isLoading',
+      val: false,
     });
   }
 
@@ -253,7 +264,6 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
               <div style={{ width: '100%' }}>
                 <IonLabel className='ion-text-wrap uiFont'>更新離線認養動物資料</IonLabel>
                 <IonLabel className='ion-text-wrap uiFont'>上次更新：{new Date(this.props.settings.dbUpdateDate).toLocaleDateString()}</IonLabel>
-                <IonProgressBar value={this.state.dataDownloadRatio} />
               </div>
               <IonButton fill='outline' shape='round' slot='end' size='large' className='uiFont' onClick={async (e) => this.updateOfflineData()}>更新</IonButton>
               <IonToast
