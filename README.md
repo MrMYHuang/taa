@@ -98,6 +98,9 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.6.2:
+  * [修正] 動物列表空白問題。
+
 * PWA 2.6.1:
   * [修正] 下載資料失敗，卻未顯示錯誤訊息。
 

@@ -220,27 +220,22 @@ class _AppOrig extends React.Component<AppOrigProps, State> {
       val: true,
     });
 
-    let data: any;
+    let data: any = [];
     try {
       data = await IndexedDbFuncs.getFile(Globals.animalsKey);
     } catch (err) {
       try {
         data = await Globals.downloadData();
         IndexedDbFuncs.saveFile(Globals.animalsKey, data);
-        this.props.dispatch({
-          type: "TMP_SET_KEY_VAL",
-          key: 'animals',
-          val: data,
-        });
       } catch (err) {
         this.setState({ showToast: true, toastMessage: `下載失敗：${err}` });
+      }
+    }
     this.props.dispatch({
-      type: "TMP_SET_KEY_VAL",
+      type: 'TMP_SET_KEY_VAL',
       key: 'animals',
       val: data,
     });
-      }
-    }
     this.props.dispatch({
       type: "TMP_SET_KEY_VAL",
       key: 'isLoading',
