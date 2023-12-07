@@ -1,3 +1,9 @@
-# Taiwan Animal Adoption (台灣動物認養) App 隱私政策聲明
+# Privacy Policy for Taiwan Animal Adoption
 
-此app無收集使用者個人資訊，也無收集匿名資訊。
+## Privacy Policy
+Taiwan Animal Adoption app (Android package ID: com.taa) is developed by Meng-Yuan Huang (myh@live.com).
+
+This app doesn't collect any data from user.
+
+## Contact Us
+If you have any questions about this Privacy Policy, You can contact the developer by email: myh@live.com
