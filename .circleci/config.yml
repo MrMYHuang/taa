@@ -70,7 +70,6 @@ jobs:
             find dist -name "*.snap" | xargs -I {} snapcraft upload {} --release beta
 
 workflows:
-  version: 2
   snap:
     jobs:
       - build-snap-amd64:
