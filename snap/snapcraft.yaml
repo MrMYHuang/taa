@@ -16,6 +16,7 @@ apps:
     - browser-support
     - network
     - network-bind
+    - home
     environment:
       # Correct the TMPDIR path for Chromium Framework/Electron to ensure
       # libappindicator has readable resources.

@@ -98,6 +98,10 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* Snap apps 2.3.0:
+  * [修正] Snap 版匯入／匯出存取權限問題.
+  * [優化] 升級至 Electron 31.4.0。
+
 * PWA 2.6.3:
   * [修正] Chrome 115 下拉選單顯示異常。
 

@@ -1,0 +1,111 @@
+version: 2.1
+
+defaults: &defaults
+  working_directory: ~/workspace
+  
+jobs:
+  build-snap-amd64:
+    <<: *defaults
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+
+      - run:
+          name: Build snap
+          command: |
+            sudo apt update
+            sudo apt install -y snapd
+            sudo snap install lxd
+            sudo snap install --classic snapcraft
+            sudo lxd init --auto --storage-backend zfs
+            npm run dist-snap
+
+      - persist_to_workspace:
+          root: ~/workspace
+          paths: ['dist/*.snap']
+
+  build-snap-arm64:
+    <<: *defaults
+    machine:
+      image: ubuntu-2004:current
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - run: git submodule sync
+      - run: git submodule update --init
+
+      - run:
+          name: Build snap
+          command: |
+            sudo apt update
+            sudo apt install -y snapd
+            sudo snap install lxd
+            sudo snap install --classic snapcraft
+            sudo lxd init --auto --storage-backend zfs
+            npm run dist-snap
+
+      - persist_to_workspace:
+          root: ~/workspace
+          paths: ['dist/*.snap']
+
+  publish:
+    <<: *defaults
+    machine:
+      image: ubuntu-2004:current
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: ~/workspace
+
+      - run:
+          name: Push/release snap
+          command: |
+            sudo apt update
+            sudo apt install -y snapd
+            sudo snap install --classic snapcraft
+            find dist -name "*.snap" | xargs -I {} snapcraft upload {} --release beta
+
+workflows:
+  version: 2
+  snap:
+    jobs:
+      - build-snap-amd64:
+          filters:
+            tags:
+              only: /^[vc][0-9]+.[0-9]+.[0-9]+$/
+            branches:
+              ignore: /.*/
+      - build-snap-arm64:
+          filters:
+            tags:
+              only: /^[vc][0-9]+.[0-9]+.[0-9]+$/
+            branches:
+              ignore: /.*/
+      - publish:
+          requires:
+            - build-snap-amd64
+            - build-snap-arm64
+          filters:
+            tags:
+              only: /^[vc][0-9]+.[0-9]+.[0-9]+$/
+            branches:
+              ignore: /.*/
+  manual:
+    jobs:
+      - hold:
+          type: approval
+      - build-snap-amd64:
+          requires:
+            - hold
+      - build-snap-arm64:
+          requires:
+            - hold
+      - publish:
+          requires:
+            - hold
+            - build-snap-amd64
+            - build-snap-arm64
