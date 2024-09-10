@@ -98,6 +98,9 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.6.4:
+  * [修正] 修正認養動物資料來源 URL。
+
 * Snap apps 2.3.0:
   * [修正] Snap 版匯入／匯出存取權限問題.
   * [優化] 升級至 Electron 31.4.0。

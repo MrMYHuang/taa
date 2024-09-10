@@ -3,7 +3,7 @@ import { isPlatform, IonLabel } from '@ionic/react';
 import { Settings } from './models/Settings';
 
 const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
-const dataUrl = 'https://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL';
+const dataUrl = 'https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&IsTransData=1';
 const pwaUrl = process.env.PUBLIC_URL || '';
 
 const animalsKey = 'animals';
