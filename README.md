@@ -98,6 +98,9 @@ https://myhpwa.github.io/taa
 1. iOS Safari 13.4以上才支援"分享此頁"功能。
 
 ## <a id='history'>版本歷史</a>
+* PWA 2.7.0:
+  * [優化] 認養動物資料下載速度優化。
+
 * PWA 2.6.4:
   * [修正] 修正認養動物資料來源 URL。
 

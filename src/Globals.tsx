@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { ungzip } from 'pako';
+import { Archive } from '@obsidize/tar-browserify';
 import { isPlatform, IonLabel } from '@ionic/react';
 import { Settings } from './models/Settings';
 
 const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
-const dataUrl = 'https://data.moa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL&IsTransData=1';
+const dataUrl = 'https://data.mrmyh.eu.org/taa.tgz';
 const pwaUrl = process.env.PUBLIC_URL || '';
 
 const animalsKey = 'animals';
@@ -16,10 +18,17 @@ let log = '';
 
 async function downloadData() {
   const res = await axiosInstance.get(dataUrl, {
-    responseType: 'json'
+    responseType: 'arraybuffer'
   });
 
-  return res.data;
+  const tarBuffer = ungzip(res.data);
+  let obj = {};
+  for await (const entry of Archive.read(tarBuffer)) {
+    if (entry.isFile() && entry.fileName === 'taa.json') {
+      obj = JSON.parse(entry.text());
+    }
+  }
+  return obj;
 }
 
 async function clearAppData() {
