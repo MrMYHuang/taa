@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => ({
       injectRegister: null,
       injectManifest: {
         swSrc: 'src/service-worker.ts',
-        swDest: 'service-worker.js',
+        swDest: 'dist/service-worker.js',
       },
     }),
   ],
