@@ -6,7 +6,7 @@ import { Settings } from './models/Settings';
 
 const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
 const dataUrl = 'https://data.mrmyh.eu.org/taa.tgz';
-const pwaUrl = process.env.PUBLIC_URL || '';
+const pwaUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const animalsKey = 'animals';
 
@@ -149,7 +149,7 @@ const Globals = {
       <IonLabel>
         <div>
           <div>連線失敗!</div>
-          <div style={{ fontSize: 'var(--ui-font-size)', paddingTop: 24 }}>請嘗試點擊右上方的重新讀取按鈕。如果問題持續發生，請執行<a href={`/${pwaUrl}/settings`} target="_self">設定頁</a>的 app 異常回報功能。</div>
+          <div style={{ fontSize: 'var(--ui-font-size)', paddingTop: 24 }}>請嘗試點擊右上方的重新讀取按鈕。如果問題持續發生，請執行<a href={`${pwaUrl}/settings`} target="_self">設定頁</a>的 app 異常回報功能。</div>
         </div>
       </IonLabel>
     </div>
