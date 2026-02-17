@@ -170,7 +170,7 @@ class _SettingsPage extends React.Component<PageProps, StateProps> {
                       }
 
                       try {
-                        Globals.axiosInstance.post(Globals.bugReportApiUrl, {
+                        await Globals.axiosInstance.post(Globals.bugReportApiUrl, {
                           subject: `${PackageInfos.productName}異常記錄回報`,
                           text: `E-mail: ${value.name0}\n\n發生步驟: ${value.name1}\n\n${this.reportText}`,
                         });
