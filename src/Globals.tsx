@@ -4,7 +4,7 @@ import { Archive } from '@obsidize/tar-browserify';
 import { isPlatform, IonLabel } from '@ionic/react';
 import { Settings } from './models/Settings';
 
-const bugReportApiUrl = 'https://vh6ud1o56g.execute-api.ap-northeast-1.amazonaws.com/bugReportMailer';
+const bugReportApiUrl = 'https://bug-report.mrmyh.eu.org/bugReportMailer';
 const dataUrl = 'https://data.mrmyh.eu.org/taa.tgz';
 const pwaUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
 
